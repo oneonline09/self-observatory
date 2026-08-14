@@ -1,0 +1,31 @@
+---
+import { t } from '../i18n/ui';
+import type { Lang } from '../i18n/ui';
+import { homeUrl, sectionUrl, exploreUrl, aboutUrl, searchUrl } from '../lib/urls';
+
+interface Props {
+  lang: Lang;
+  altUrl?: string | null;
+}
+const { lang, altUrl = null } = Astro.props;
+const tt = t(lang);
+const path = Astro.url.pathname;
+const viUrl = lang === 'vi' ? path : altUrl || '/';
+const enUrl = lang === 'en' ? path : altUrl || '/en/';
+---
+<header class="site-header">
+  <div class="bar">
+    <a class="brand" href={homeUrl(lang)}>Self Observatory</a>
+    <nav class="nav">
+      <a href={sectionUrl('field', lang)}>{tt('nav.field')}</a>
+      <a href={sectionUrl('insight', lang)}>{tt('nav.insight')}</a>
+      <a href={exploreUrl(lang)}>{tt('nav.explore')}</a>
+      <a href={aboutUrl(lang)}>{tt('nav.about')}</a>
+      <a href={searchUrl(lang)}>{tt('nav.search')}</a>
+      <span class="lang-switch">
+        <a href={viUrl} aria-current={lang === 'vi' ? 'true' : undefined}>VI</a>
+        <a href={enUrl} aria-current={lang === 'en' ? 'true' : undefined}>EN</a>
+      </span>
+    </nav>
+  </div>
+</header>

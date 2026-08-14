@@ -1,0 +1,62 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import ConnectedNotes from '../components/ConnectedNotes.astro';
+import SocialDiscuss from '../components/SocialDiscuss.astro';
+import Comments from '../components/Comments.astro';
+import { t } from '../i18n/ui';
+import { topicUrl, tagUrl } from '../lib/urls';
+import type { Note } from '../lib/content';
+import { getTranslation } from '../lib/content';
+
+interface Props {
+  note: Note;
+}
+const { note } = Astro.props;
+const tt = t(note.lang);
+const trans = await getTranslation(note);
+const altUrl = trans ? trans.url : null;
+const label = note.type === 'field' ? tt('label.field') : tt('label.insight');
+const locale = note.lang === 'vi' ? 'vi-VN' : 'en-US';
+const fmt = (d: Date) => d.toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric' });
+const hasTerms = note.data.topics.length > 0 || note.data.tags.length > 0;
+---
+<BaseLayout
+  lang={note.lang}
+  title={note.data.title}
+  description={note.data.summary}
+  altUrl={altUrl}
+>
+  <article class="article">
+    <div class="note-meta" style="margin-bottom:14px">
+      <span class={`badge ${note.type}`}>{label}</span>
+      <time datetime={note.data.date.toISOString()}>{fmt(note.data.date)}</time>
+      {note.data.updated && <span>· {tt('label.updated')} {fmt(note.data.updated)}</span>}
+    </div>
+
+    <h1>{note.data.title}</h1>
+    {note.data.summary && <p class="lead">{note.data.summary}</p>}
+
+    {
+      hasTerms && (
+        <div class="chips" style="margin-top:16px">
+          {note.data.topics.map((x) => (
+            <a class="chip topic" href={topicUrl(note.lang, x)}>{x}</a>
+          ))}
+          {note.data.tags.map((x) => (
+            <a class="chip tag" href={tagUrl(note.lang, x)}>#{x}</a>
+          ))}
+        </div>
+      )
+    }
+
+    {!trans && <p class="notice">{tt('notrans.note')}</p>}
+
+    <div class="body">
+      <slot />
+    </div>
+
+    <SocialDiscuss note={note} />
+    <Comments note={note} />
+    <ConnectedNotes note={note} />
+  </article>
+</BaseLayout>

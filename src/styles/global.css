@@ -1,0 +1,262 @@
+:root {
+  --bg: #0b0c0e;
+  --panel: #141619;
+  --panel-2: #1b1e22;
+  --line: #2a2e34;
+  --ink: #e9edf1;
+  --muted: #9aa4af;
+  --dim: #6b7580;
+  --field: #7aa2ff;   /* Field Notes */
+  --insight: #8be0c8; /* Insight Notes */
+  --topic: #e6a0c4;
+  --tag: #f0b866;
+  --radius: 14px;
+  --maxw: 780px;
+  --wide: 1080px;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  --mono: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 22px; }
+.wrap-wide { max-width: var(--wide); margin: 0 auto; padding: 0 22px; }
+
+a { color: var(--field); text-decoration: none; }
+a:hover { text-decoration: underline; }
+strong { color: #fff; }
+
+h1, h2, h3 { line-height: 1.25; letter-spacing: -0.01em; }
+h1 { font-size: clamp(28px, 5vw, 40px); margin: 0 0 12px; }
+h2 { font-size: 24px; margin: 34px 0 10px; }
+h3 { font-size: 19px; margin: 26px 0 8px; }
+
+/* ---------- Header ---------- */
+.site-header {
+  border-bottom: 1px solid var(--line);
+  position: sticky; top: 0; z-index: 20;
+  background: rgba(11, 12, 14, 0.82);
+  backdrop-filter: saturate(140%) blur(10px);
+}
+.site-header .bar {
+  max-width: var(--wide); margin: 0 auto; padding: 12px 22px;
+  display: flex; align-items: center; gap: 20px;
+}
+.brand { font-weight: 700; letter-spacing: -0.02em; font-size: 17px; color: var(--ink); white-space: nowrap; }
+.brand:hover { text-decoration: none; }
+.nav { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; margin-left: auto; }
+.nav a { color: var(--muted); font-size: 14.5px; }
+.nav a:hover, .nav a[aria-current="page"] { color: var(--ink); text-decoration: none; }
+.lang-switch { display: flex; gap: 6px; border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
+.lang-switch a { font-size: 12.5px; padding: 2px 9px; border-radius: 999px; color: var(--dim); }
+.lang-switch a[aria-current="true"] { background: var(--panel-2); color: var(--ink); }
+.lang-switch a:hover { text-decoration: none; color: var(--ink); }
+
+/* ---------- Layout ---------- */
+main { padding: 40px 0 72px; }
+.eyebrow { letter-spacing: 0.22em; text-transform: uppercase; font-size: 12px; color: var(--muted); }
+.lead { color: var(--muted); font-size: 18px; }
+.dim { color: var(--dim); }
+.center { text-align: center; }
+
+/* ---------- Note meta / badges ---------- */
+.badge {
+  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 6px; border: 1px solid; display: inline-block;
+}
+.badge.field { color: var(--field); border-color: color-mix(in srgb, var(--field) 45%, transparent); }
+.badge.insight { color: var(--insight); border-color: color-mix(in srgb, var(--insight) 45%, transparent); }
+.badge.draft { color: var(--tag); border-color: color-mix(in srgb, var(--tag) 45%, transparent); }
+.note-meta { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; color: var(--dim); font-size: 13.5px; margin: 12px 0 0; }
+.note-meta time { font-variant-numeric: tabular-nums; }
+
+/* ---------- Chips ---------- */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  font-size: 13px; padding: 3px 10px; border-radius: 999px;
+  border: 1px solid var(--line); background: var(--panel-2); color: var(--muted);
+}
+.chip:hover { color: var(--ink); border-color: var(--dim); text-decoration: none; }
+.chip.topic { color: var(--topic); }
+.chip.tag { color: var(--tag); }
+.chip .n { color: var(--dim); margin-left: 5px; font-variant-numeric: tabular-nums; }
+
+/* ---------- Post card ---------- */
+.card-list { display: grid; gap: 2px; margin: 22px 0; }
+.card {
+  display: block; padding: 18px 20px; border: 1px solid var(--line);
+  border-radius: var(--radius); background: var(--panel);
+  transition: border-color 0.15s, transform 0.15s;
+}
+.card:hover { border-color: var(--dim); text-decoration: none; transform: translateY(-1px); }
+.card h3 { margin: 8px 0 4px; color: var(--ink); font-size: 20px; }
+.card p { margin: 4px 0 0; color: var(--muted); font-size: 15px; }
+.card .card-top { display: flex; align-items: center; gap: 10px; }
+.card .card-top time { color: var(--dim); font-size: 13px; margin-left: auto; }
+
+/* ---------- Article ---------- */
+.article { }
+.article .body { margin-top: 30px; font-size: 18px; }
+.article .body > *:first-child { margin-top: 0; }
+.article .body p { margin: 18px 0; }
+.article .body img { max-width: 100%; height: auto; border-radius: 12px; margin: 24px 0; }
+.article .body blockquote {
+  margin: 22px 0; padding: 4px 18px; border-left: 3px solid var(--field);
+  color: var(--muted); font-style: italic;
+}
+.article .body h2 { margin-top: 40px; }
+.article .body code {
+  background: #0f1114; border: 1px solid var(--line); padding: 0.1em 0.4em;
+  border-radius: 6px; font-family: var(--mono); font-size: 0.86em; color: var(--insight);
+}
+.article .body pre { background: #0f1114; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; overflow: auto; }
+.article .body pre code { background: none; border: none; padding: 0; }
+.article .body ul, .article .body ol { padding-left: 22px; }
+.article .body a { border-bottom: 1px solid color-mix(in srgb, var(--field) 40%, transparent); }
+
+/* embed video responsive (facade / iframe) */
+.embed { position: relative; aspect-ratio: 16 / 9; margin: 24px 0; border-radius: 12px; overflow: hidden; background: var(--panel-2); }
+.embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+/* ---------- Section blocks ---------- */
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; }
+.section-divider { border: none; border-top: 1px solid var(--line); margin: 44px 0; }
+.explore-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 22px 0; }
+.explore-grid a.tile { display: block; padding: 20px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); }
+.explore-grid a.tile:hover { border-color: var(--dim); text-decoration: none; }
+.explore-grid .tile h3 { margin: 0 0 6px; color: var(--ink); }
+.explore-grid .tile p { margin: 0; color: var(--muted); font-size: 14px; }
+
+/* ---------- Comments (Disqus) ---------- */
+.comments { margin-top: 40px; padding-top: 26px; border-top: 1px solid var(--line); }
+.comments h2 { margin-top: 0; font-size: 18px; letter-spacing: 0.02em; }
+.load-comments {
+  font: inherit; font-size: 14px; cursor: pointer;
+  padding: 9px 18px; border-radius: 999px; border: 1px solid var(--line);
+  background: var(--panel-2); color: var(--muted);
+}
+.load-comments:hover { color: var(--ink); border-color: var(--dim); }
+#disqus_thread { margin-top: 12px; }
+
+/* ---------- Connected notes ---------- */
+.connected { margin-top: 52px; padding-top: 26px; border-top: 1px solid var(--line); }
+.connected h2 { margin-top: 0; font-size: 18px; letter-spacing: 0.02em; }
+
+/* ---------- Discuss / social ---------- */
+.discuss { margin-top: 32px; padding: 18px 20px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); }
+.discuss h3 { margin: 0 0 10px; font-size: 15px; }
+.discuss .row { display: flex; flex-wrap: wrap; gap: 8px; }
+.discuss a, .discuss button {
+  font: inherit; font-size: 13.5px; cursor: pointer;
+  padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line);
+  background: var(--panel-2); color: var(--muted);
+}
+.discuss a:hover, .discuss button:hover { color: var(--ink); border-color: var(--dim); text-decoration: none; }
+
+/* ---------- Footer ---------- */
+.site-footer { border-top: 1px solid var(--line); padding: 30px 22px; color: var(--dim); font-size: 13.5px; }
+.site-footer .bar { max-width: var(--wide); margin: 0 auto; display: flex; flex-wrap: wrap; gap: 12px 22px; align-items: center; }
+.site-footer a { color: var(--muted); }
+.site-footer .spacer { margin-left: auto; }
+
+/* ---------- Notices ---------- */
+.notice { border-left: 3px solid var(--tag); background: var(--panel-2); padding: 10px 16px; border-radius: 0 10px 10px 0; color: var(--muted); font-size: 14px; margin: 18px 0; }
+
+/* ---------- Map ---------- */
+#constellation { width: 100%; height: 68vh; min-height: 460px; border: 1px solid var(--line); border-radius: var(--radius); background: radial-gradient(1200px 500px at 50% -10%, rgba(122,162,255,0.06), transparent 70%), var(--panel); display: block; touch-action: none; }
+.map-toolbar { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0; }
+.map-toolbar button { font: inherit; font-size: 13.5px; cursor: pointer; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--panel-2); color: var(--muted); }
+.map-toolbar button[aria-pressed="true"] { color: var(--ink); border-color: var(--dim); background: var(--panel); }
+.map-legend { display: flex; gap: 16px; flex-wrap: wrap; color: var(--dim); font-size: 13px; margin-top: 10px; }
+.map-legend .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+/* ---------- Search ---------- */
+:root { --pagefind-ui-primary: var(--ink); --pagefind-ui-text: var(--ink); --pagefind-ui-background: var(--panel); --pagefind-ui-border: var(--line); --pagefind-ui-tag: var(--panel-2); --pagefind-ui-border-radius: 12px; --pagefind-ui-font: var(--font); }
+
+/* ---------- Cosmic starfield (nền vũ trụ, site-wide) ---------- */
+.sky {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  background:
+    radial-gradient(1100px 620px at 50% -220px, rgba(122, 162, 255, 0.10), transparent 70%),
+    radial-gradient(820px 520px at 86% 8%, rgba(139, 224, 200, 0.06), transparent 70%),
+    radial-gradient(760px 520px at 8% 22%, rgba(230, 160, 196, 0.05), transparent 70%);
+}
+.sky::before,
+.sky::after {
+  content: '';
+  position: absolute;
+  inset: -60%;
+  background-repeat: repeat;
+  will-change: transform;
+}
+/* lớp sao trắng nhỏ, dày, mờ */
+.sky::before {
+  background-image:
+    radial-gradient(1px 1px at 30px 40px, rgba(255, 255, 255, 0.85), transparent),
+    radial-gradient(1px 1px at 130px 90px, rgba(255, 255, 255, 0.55), transparent),
+    radial-gradient(1px 1px at 80px 170px, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 190px 60px, rgba(255, 255, 255, 0.45), transparent),
+    radial-gradient(1px 1px at 210px 200px, rgba(255, 255, 255, 0.5), transparent);
+  background-size: 230px 230px;
+  opacity: 0.5;
+  animation: sky-drift 200s linear infinite;
+}
+/* lớp sao màu, thưa, to hơn, trôi chậm ngược lại */
+.sky::after {
+  background-image:
+    radial-gradient(1.7px 1.7px at 60px 50px, rgba(122, 162, 255, 0.9), transparent),
+    radial-gradient(1.7px 1.7px at 170px 130px, rgba(139, 224, 200, 0.85), transparent),
+    radial-gradient(1.5px 1.5px at 100px 200px, rgba(230, 160, 196, 0.8), transparent),
+    radial-gradient(1.5px 1.5px at 230px 40px, rgba(240, 184, 102, 0.8), transparent),
+    radial-gradient(1.4px 1.4px at 300px 180px, rgba(255, 255, 255, 0.7), transparent);
+  background-size: 340px 340px;
+  opacity: 0.6;
+  animation: sky-drift 320s linear infinite reverse;
+}
+@keyframes sky-drift {
+  from { transform: translateY(0); }
+  to { transform: translateY(-240px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sky::before,
+  .sky::after { animation: none; }
+}
+
+/* ---------- Hero constellation (trang chủ) ---------- */
+.hero-sky {
+  position: relative;
+  isolation: isolate;
+}
+.hero-sky .constellation-deco {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+  width: min(720px, 92%);
+  height: 300px;
+  z-index: -1;
+  opacity: 0.32;
+  filter: blur(0.4px);
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  .nav { gap: 12px; }
+  .brand { font-size: 15px; }
+  .hero-sky .constellation-deco { height: 220px; }
+}

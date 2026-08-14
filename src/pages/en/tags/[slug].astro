@@ -1,0 +1,23 @@
+---
+import TermPage from '../../../components/TermPage.astro';
+import { getTags, getNotesByTag } from '../../../lib/content';
+
+export async function getStaticPaths() {
+  const [enTags, viTags] = await Promise.all([getTags('en'), getTags('vi')]);
+  const viSet = new Set(viTags.map((x) => x.slug));
+  const out = [];
+  for (const tg of enTags) {
+    out.push({
+      params: { slug: tg.slug },
+      props: {
+        notes: await getNotesByTag('en', tg.slug),
+        altUrl: viSet.has(tg.slug) ? `/tags/${tg.slug}/` : null,
+      },
+    });
+  }
+  return out;
+}
+const { slug } = Astro.params;
+const { notes, altUrl } = Astro.props;
+---
+<TermPage lang="en" kind="tag" term={slug} notes={notes} altUrl={altUrl} />

@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from './PostCard.astro';
+import { getNotes } from '../lib/content';
+import { mapUrl, exploreUrl, homeUrl } from '../lib/urls';
+import { t, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const tt = t(lang);
+const other: Lang = lang === 'vi' ? 'en' : 'vi';
+const notes = (await getNotes(lang)).slice(0, 6);
+const heroTitle = lang === 'vi' ? 'Một đài quan sát' : 'An observatory';
+const heroLead =
+  lang === 'vi'
+    ? 'Field Notes quan sát quan hệ của tôi với thế giới. Insight Notes quan sát quan hệ với chính mình. Constellation Map cho thấy chúng gặp nhau ở đâu.'
+    : 'Field Notes observe my relationship with the world. Insight Notes observe my relationship with myself. The Constellation Map shows where they meet.';
+---
+<BaseLayout lang={lang} altUrl={homeUrl(other)}>
+  <section class="center hero-sky" style="padding:40px 0 12px">
+    <svg class="constellation-deco" viewBox="0 0 760 320" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+      <g stroke="rgba(154,164,175,0.16)" stroke-width="0.8">
+        <path d="M70 90 L210 60 L330 140 L470 70 L610 120 L690 60" />
+        <path d="M210 60 L250 190 L330 140" />
+        <path d="M470 70 L520 210 L610 120" />
+        <path d="M250 190 L400 250 L520 210" />
+      </g>
+      <g>
+        <circle cx="70" cy="90" r="3.4" fill="#7aa2ff" />
+        <circle cx="210" cy="60" r="4.2" fill="#8be0c8" />
+        <circle cx="330" cy="140" r="3" fill="#ffffff" />
+        <circle cx="470" cy="70" r="4" fill="#e6a0c4" />
+        <circle cx="610" cy="120" r="3.6" fill="#f0b866" />
+        <circle cx="690" cy="60" r="2.6" fill="#7aa2ff" />
+        <circle cx="250" cy="190" r="3.2" fill="#f0b866" />
+        <circle cx="520" cy="210" r="3.2" fill="#8be0c8" />
+        <circle cx="400" cy="250" r="4.4" fill="#7aa2ff" />
+      </g>
+    </svg>
+    <p class="eyebrow">Self Observatory</p>
+    <h1 style="font-size:clamp(32px,6vw,52px);margin:8px 0 0">{heroTitle}</h1>
+    <p class="lead" style="max-width:600px;margin:14px auto 0">{heroLead}</p>
+  </section>
+
+  <hr class="section-divider" />
+
+  <h2>{tt('home.latest')}</h2>
+  {
+    notes.length ? (
+      <div class="card-list">{notes.map((n) => <PostCard note={n} />)}</div>
+    ) : (
+      <p class="dim">—</p>
+    )
+  }
+
+  <p style="margin-top:26px">
+    <a href={mapUrl(lang)}>{tt('home.viewMap')} →</a>
+    &nbsp;·&nbsp;
+    <a href={exploreUrl(lang)}>{tt('home.exploreAll')} →</a>
+  </p>
+</BaseLayout>

@@ -1,0 +1,233 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { t, type Lang } from '../i18n/ui';
+import { mapUrl } from '../lib/urls';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const tt = t(lang);
+const other: Lang = lang === 'vi' ? 'en' : 'vi';
+const dataUrl = `/graph/${lang}.json`;
+---
+<BaseLayout lang={lang} title={tt('map.title')} altUrl={mapUrl(other)} wide={true}>
+  <p class="eyebrow">{tt('nav.explore')}</p>
+  <h1>{tt('map.title')}</h1>
+  <p class="lead">{tt('map.intro')}</p>
+
+  <div class="map-toolbar" id="map-filters">
+    <button data-filter="all" aria-pressed="true">{tt('map.filter.all')}</button>
+    <button data-filter="field" aria-pressed="false">{tt('map.filter.field')}</button>
+    <button data-filter="insight" aria-pressed="false">{tt('map.filter.insight')}</button>
+  </div>
+
+  <canvas id="constellation"></canvas>
+
+  <div class="map-legend">
+    <span><span class="dot" style="background:#7aa2ff"></span>Field</span>
+    <span><span class="dot" style="background:#8be0c8"></span>Insight</span>
+    <span><span class="dot" style="background:#e6a0c4"></span>{tt('label.topics')}</span>
+    <span><span class="dot" style="background:#f0b866"></span>{tt('label.tags')}</span>
+  </div>
+</BaseLayout>
+
+<script is:inline define:vars={{ dataUrl }}>
+  (function () {
+    const canvas = document.getElementById('constellation');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const COLORS = { field: '#7aa2ff', insight: '#8be0c8', topic: '#e6a0c4', tag: '#f0b866' };
+
+    let nodes = [];
+    let links = [];
+    let filter = 'all';
+    let width = 0, height = 0, dpr = 1;
+    let hoverId = null, dragNode = null, dragged = false;
+    let pointer = { x: 0, y: 0 };
+
+    function resize() {
+      const rect = canvas.getBoundingClientRect();
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = rect.width; height = rect.height;
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function nodeVisible(n) {
+      if (filter === 'all') return true;
+      if (n.type === filter) return true;
+      // giữ topic/tag nếu còn nối tới note đang hiện
+      if (n.type === 'topic' || n.type === 'tag') {
+        return links.some((l) =>
+          (l.source === n.id && isNoteVisible(byId[l.target])) ||
+          (l.target === n.id && isNoteVisible(byId[l.source]))
+        );
+      }
+      return false;
+    }
+    function isNoteVisible(n) {
+      if (!n) return false;
+      if (n.type !== 'field' && n.type !== 'insight') return false;
+      return filter === 'all' || n.type === filter;
+    }
+
+    let byId = {};
+
+    function start(data) {
+      nodes = data.nodes.map((n) => ({
+        ...n,
+        x: width / 2 + (Math.random() - 0.5) * width * 0.6,
+        y: height / 2 + (Math.random() - 0.5) * height * 0.6,
+        vx: 0, vy: 0,
+        r: n.type === 'field' || n.type === 'insight' ? 7 : 4,
+      }));
+      links = data.links.slice();
+      byId = {};
+      for (const n of nodes) byId[n.id] = n;
+      loop();
+    }
+
+    function tick() {
+      const vis = nodes.filter(nodeVisible);
+      const k = 0.02; // gravity về tâm
+      // lực đẩy giữa các node
+      for (let i = 0; i < vis.length; i++) {
+        const a = vis[i];
+        for (let j = i + 1; j < vis.length; j++) {
+          const b = vis[j];
+          let dx = a.x - b.x, dy = a.y - b.y;
+          let d2 = dx * dx + dy * dy || 0.01;
+          const rep = 1400 / d2;
+          const d = Math.sqrt(d2);
+          const fx = (dx / d) * rep, fy = (dy / d) * rep;
+          a.vx += fx; a.vy += fy; b.vx -= fx; b.vy -= fy;
+        }
+      }
+      // lực lò xo trên cạnh
+      for (const l of links) {
+        const a = byId[l.source], b = byId[l.target];
+        if (!a || !b || !nodeVisible(a) || !nodeVisible(b)) continue;
+        const ideal = 70 / (0.4 + l.weight);
+        let dx = b.x - a.x, dy = b.y - a.y;
+        const d = Math.sqrt(dx * dx + dy * dy) || 0.01;
+        const f = (d - ideal) * 0.015 * l.weight;
+        const fx = (dx / d) * f, fy = (dy / d) * f;
+        a.vx += fx; a.vy += fy; b.vx -= fx; b.vy -= fy;
+      }
+      // gravity + damping + integrate
+      for (const n of vis) {
+        if (n === dragNode) continue;
+        n.vx += (width / 2 - n.x) * k * 0.05;
+        n.vy += (height / 2 - n.y) * k * 0.05;
+        n.vx *= 0.86; n.vy *= 0.86;
+        n.x += n.vx; n.y += n.vy;
+        n.x = Math.max(14, Math.min(width - 14, n.x));
+        n.y = Math.max(14, Math.min(height - 14, n.y));
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+      // cạnh
+      ctx.lineWidth = 1;
+      for (const l of links) {
+        const a = byId[l.source], b = byId[l.target];
+        if (!a || !b || !nodeVisible(a) || !nodeVisible(b)) continue;
+        const strong = l.weight >= 2;
+        ctx.strokeStyle = strong ? 'rgba(122,162,255,0.34)' : 'rgba(154,164,175,0.14)';
+        ctx.lineWidth = strong ? 1.4 : 1;
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+      }
+      // node
+      for (const n of nodes) {
+        if (!nodeVisible(n)) continue;
+        const isNote = n.type === 'field' || n.type === 'insight';
+        const hovered = n.id === hoverId;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r + (hovered ? 2 : 0), 0, Math.PI * 2);
+        ctx.fillStyle = COLORS[n.type] || '#9aa4af';
+        ctx.globalAlpha = isNote ? 1 : 0.85;
+        ctx.fill();
+        ctx.globalAlpha = 1;
+        if (isNote || hovered) {
+          ctx.fillStyle = hovered ? '#e9edf1' : 'rgba(233,237,241,0.72)';
+          ctx.font = (hovered ? '600 ' : '') + '12.5px -apple-system, sans-serif';
+          ctx.textAlign = 'center';
+          const label = n.label.length > 34 ? n.label.slice(0, 32) + '…' : n.label;
+          ctx.fillText(label, n.x, n.y - n.r - 6);
+        }
+      }
+    }
+
+    let cooling = 1;
+    function loop() {
+      tick();
+      draw();
+      requestAnimationFrame(loop);
+    }
+
+    function pick(mx, my) {
+      let best = null, bd = 16 * 16;
+      for (const n of nodes) {
+        if (!nodeVisible(n)) continue;
+        const dx = n.x - mx, dy = n.y - my, d = dx * dx + dy * dy;
+        if (d < bd) { bd = d; best = n; }
+      }
+      return best;
+    }
+
+    function toLocal(e) {
+      const rect = canvas.getBoundingClientRect();
+      return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    }
+
+    canvas.addEventListener('pointermove', (e) => {
+      pointer = toLocal(e);
+      if (dragNode) {
+        dragNode.x = pointer.x; dragNode.y = pointer.y; dragNode.vx = 0; dragNode.vy = 0;
+        dragged = true;
+        return;
+      }
+      const n = pick(pointer.x, pointer.y);
+      hoverId = n ? n.id : null;
+      canvas.style.cursor = n ? 'pointer' : 'default';
+    });
+    canvas.addEventListener('pointerdown', (e) => {
+      pointer = toLocal(e);
+      dragNode = pick(pointer.x, pointer.y);
+      dragged = false;
+      if (dragNode) canvas.setPointerCapture(e.pointerId);
+    });
+    canvas.addEventListener('pointerup', (e) => {
+      const n = dragNode;
+      dragNode = null;
+      if (n && !dragged && n.url) window.location.href = n.url;
+    });
+
+    const filterBar = document.getElementById('map-filters');
+    if (filterBar) {
+      filterBar.addEventListener('click', (e) => {
+        const btn = e.target.closest('button[data-filter]');
+        if (!btn) return;
+        filter = btn.getAttribute('data-filter');
+        for (const b of filterBar.querySelectorAll('button')) {
+          b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+        }
+      });
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+    fetch(dataUrl)
+      .then((r) => r.json())
+      .then(start)
+      .catch(() => {
+        ctx.fillStyle = '#9aa4af';
+        ctx.font = '14px sans-serif';
+        ctx.fillText('Không tải được dữ liệu bản đồ.', 20, 40);
+      });
+  })();
+</script>

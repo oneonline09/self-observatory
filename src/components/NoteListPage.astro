@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from './PostCard.astro';
+import { getNotes } from '../lib/content';
+import type { NoteType } from '../lib/urls';
+import { sectionUrl } from '../lib/urls';
+import { t, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  type: NoteType;
+}
+const { lang, type } = Astro.props;
+const tt = t(lang);
+const notes = await getNotes(lang, type);
+const other: Lang = lang === 'vi' ? 'en' : 'vi';
+const altUrl = sectionUrl(type, other);
+const title = type === 'field' ? tt('nav.field') : tt('nav.insight');
+const label = type === 'field' ? tt('label.field') : tt('label.insight');
+const intro = {
+  field: {
+    vi: 'Ghi lại tương tác của tôi với thế giới bên ngoài — con người, cộng đồng, thành phố, sự kiện, quan sát.',
+    en: 'Traces of my encounters with the outside world — people, communities, the city, events, observations.',
+  },
+  insight: {
+    vi: 'Ghi chép hướng vào bên trong — phản tư, niềm tin, câu hỏi, và cách tôi hiểu và thay đổi.',
+    en: 'Notes turned inward — reflections, beliefs, questions, and how I come to understand and change.',
+  },
+}[type][lang];
+---
+<BaseLayout lang={lang} title={title} altUrl={altUrl}>
+  <p class="eyebrow">{label}</p>
+  <h1>{title}</h1>
+  <p class="lead">{intro}</p>
+  {
+    notes.length ? (
+      <div class="card-list">{notes.map((n) => <PostCard note={n} />)}</div>
+    ) : (
+      <p class="dim">—</p>
+    )
+  }
+</BaseLayout>

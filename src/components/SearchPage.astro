@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { t, type Lang } from '../i18n/ui';
+import { searchUrl } from '../lib/urls';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const tt = t(lang);
+const other: Lang = lang === 'vi' ? 'en' : 'vi';
+---
+<BaseLayout lang={lang} title={tt('search.title')} altUrl={searchUrl(other)}>
+  <p class="eyebrow">{tt('nav.explore')}</p>
+  <h1>{tt('search.title')}</h1>
+  <p class="lead">{tt('search.placeholder')}</p>
+
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+  <div id="search" style="margin-top:20px"></div>
+  <p class="notice" id="search-note">
+    {lang === 'vi'
+      ? 'Tìm kiếm chỉ hoạt động trên bản build (astro build) hoặc astro preview, không chạy trong dev.'
+      : 'Search only works in a built site (astro build) or astro preview, not in dev.'}
+  </p>
+
+  <script is:inline src="/pagefind/pagefind-ui.js"></script>
+  <script is:inline>
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.PagefindUI) {
+        document.getElementById('search-note')?.remove();
+        new window.PagefindUI({
+          element: '#search',
+          showSubResults: true,
+          showImages: false,
+        });
+      }
+    });
+  </script>
+</BaseLayout>

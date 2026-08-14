@@ -1,0 +1,26 @@
+---
+import type { Note } from '../lib/content';
+import { t } from '../i18n/ui';
+
+interface Props {
+  note: Note;
+}
+const { note } = Astro.props;
+const tt = t(note.lang);
+const label = note.type === 'field' ? tt('label.field') : tt('label.insight');
+const locale = note.lang === 'vi' ? 'vi-VN' : 'en-US';
+const dateStr = note.data.date.toLocaleDateString(locale, {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+---
+<a class="card" href={note.url}>
+  <div class="card-top">
+    <span class={`badge ${note.type}`}>{label}</span>
+    {note.data.draft && <span class="badge draft">{tt('draft.badge')}</span>}
+    <time datetime={note.data.date.toISOString()}>{dateStr}</time>
+  </div>
+  <h3>{note.data.title}</h3>
+  {note.data.summary && <p>{note.data.summary}</p>}
+</a>

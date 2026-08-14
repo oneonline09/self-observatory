@@ -1,0 +1,24 @@
+---
+import { SITE } from '../consts.js';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const s = SITE.social;
+const year = new Date().getFullYear();
+const tagline = lang === 'vi'
+  ? 'Một đài quan sát về chính mình và thế giới.'
+  : 'An observatory of the self and the world.';
+---
+<footer class="site-footer">
+  <div class="bar">
+    <span>© {year} {SITE.author} — <em>{tagline}</em></span>
+    <span class="spacer"></span>
+    {s.facebook && <a href={s.facebook} rel="me">Facebook</a>}
+    {s.threads && <a href={s.threads} rel="me">Threads</a>}
+    {s.x && <a href={s.x} rel="me">X</a>}
+    {s.email && <a href={`mailto:${s.email}`}>Email</a>}
+  </div>
+</footer>

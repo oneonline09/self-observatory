@@ -1,0 +1,57 @@
+---
+import { SITE } from '../consts.js';
+import { t } from '../i18n/ui';
+import type { Note } from '../lib/content';
+
+interface Props {
+  note: Note;
+}
+const { note } = Astro.props;
+const tt = t(note.lang);
+const shortname = SITE.disqusShortname;
+// Định danh ổn định theo bài (không đổi kể cả khi đổi tên miền)
+const identifier = `${note.type}:${note.lang}:${note.slug}`;
+const pageUrl = new URL(note.url, Astro.site).href;
+---
+{
+  shortname && (
+    <section class="comments" id="comments">
+      <h2>{tt('comments.title')}</h2>
+      <p class="dim" style="margin:-2px 0 14px;font-size:14px">{tt('comments.hint')}</p>
+      <button type="button" id="load-comments" class="load-comments">{tt('comments.load')}</button>
+      <div id="disqus_thread"></div>
+      <script
+        is:inline
+        set:html={`
+        (function () {
+          window.disqus_config = function () {
+            this.page.url = ${JSON.stringify(pageUrl)};
+            this.page.identifier = ${JSON.stringify(identifier)};
+          };
+          var loaded = false;
+          function loadDisqus() {
+            if (loaded) return; loaded = true;
+            var btn = document.getElementById('load-comments');
+            if (btn) btn.style.display = 'none';
+            var s = document.createElement('script');
+            s.src = 'https://' + ${JSON.stringify(shortname)} + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (document.head || document.body).appendChild(s);
+          }
+          var btn = document.getElementById('load-comments');
+          if (btn) btn.addEventListener('click', loadDisqus);
+          if ('IntersectionObserver' in window) {
+            var target = document.getElementById('comments');
+            var io = new IntersectionObserver(function (entries) {
+              entries.forEach(function (e) {
+                if (e.isIntersecting) { loadDisqus(); io.disconnect(); }
+              });
+            }, { rootMargin: '500px' });
+            if (target) io.observe(target);
+          }
+        })();
+      `}
+      />
+    </section>
+  )
+}

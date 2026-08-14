@@ -1,0 +1,48 @@
+---
+import { t } from '../i18n/ui';
+import type { Note } from '../lib/content';
+
+interface Props {
+  note: Note;
+}
+const { note } = Astro.props;
+const tt = t(note.lang);
+const pageUrl = new URL(note.url, Astro.site).href;
+const text = note.data.title;
+const fb = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`;
+const threads = `https://www.threads.net/intent/post?text=${encodeURIComponent(text + ' ' + pageUrl)}`;
+const x = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(pageUrl)}`;
+---
+<section class="discuss">
+  <h3>{tt('discuss.title')}</h3>
+  <div class="row">
+    {
+      note.data.discuss && (
+        <a href={note.data.discuss} target="_blank" rel="noopener">
+          {tt('discuss.on')} →
+        </a>
+      )
+    }
+    <a href={fb} target="_blank" rel="noopener">Facebook</a>
+    <a href={threads} target="_blank" rel="noopener">Threads</a>
+    <a href={x} target="_blank" rel="noopener">X</a>
+    <button type="button" data-copy={pageUrl} data-label={tt('discuss.copy')}>
+      {tt('discuss.copy')}
+    </button>
+  </div>
+</section>
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.discuss button[data-copy]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const url = btn.getAttribute('data-copy') || '';
+      try {
+        await navigator.clipboard.writeText(url);
+        const original = btn.getAttribute('data-label') || '';
+        btn.textContent = '✓';
+        setTimeout(() => (btn.textContent = original), 1400);
+      } catch (e) {
+        /* clipboard không khả dụng */
+      }
+    });
+  });
+</script>

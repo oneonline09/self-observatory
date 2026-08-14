@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getTopics, getTags } from '../lib/content';
+import { topicUrl, tagUrl, searchUrl, mapUrl, exploreUrl } from '../lib/urls';
+import { t, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const tt = t(lang);
+const [topics, tags] = await Promise.all([getTopics(lang), getTags(lang)]);
+const other: Lang = lang === 'vi' ? 'en' : 'vi';
+---
+<BaseLayout lang={lang} title={tt('explore.title')} altUrl={exploreUrl(other)}>
+  <p class="eyebrow">{tt('explore.title')}</p>
+  <h1>{tt('explore.title')}</h1>
+  <p class="lead">{tt('explore.intro')}</p>
+
+  <div class="explore-grid">
+    <a class="tile" href={searchUrl(lang)}>
+      <h3>{tt('explore.search')}</h3>
+      <p>{tt('search.placeholder')}</p>
+    </a>
+    <a class="tile" href={mapUrl(lang)}>
+      <h3>{tt('explore.map')}</h3>
+      <p>{tt('map.intro')}</p>
+    </a>
+  </div>
+
+  <h2>{tt('explore.topics')}</h2>
+  <div class="chips">
+    {topics.map((x) => (
+      <a class="chip topic" href={topicUrl(lang, x.slug)}>{x.slug}<span class="n">{x.count}</span></a>
+    ))}
+    {topics.length === 0 && <span class="dim">—</span>}
+  </div>
+
+  <h2>{tt('explore.tags')}</h2>
+  <div class="chips">
+    {tags.map((x) => (
+      <a class="chip tag" href={tagUrl(lang, x.slug)}>#{x.slug}<span class="n">{x.count}</span></a>
+    ))}
+    {tags.length === 0 && <span class="dim">—</span>}
+  </div>
+</BaseLayout>

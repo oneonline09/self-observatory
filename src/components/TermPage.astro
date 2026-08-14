@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from './PostCard.astro';
+import { t, type Lang } from '../i18n/ui';
+import type { Note } from '../lib/content';
+
+interface Props {
+  lang: Lang;
+  kind: 'topic' | 'tag';
+  term: string;
+  notes: Note[];
+  altUrl: string | null;
+}
+const { lang, kind, term, notes, altUrl } = Astro.props;
+const tt = t(lang);
+const heading = kind === 'topic' ? tt('topic.heading') : tt('tag.heading');
+const display = kind === 'tag' ? `#${term}` : term;
+---
+<BaseLayout lang={lang} title={display} altUrl={altUrl}>
+  <p class="eyebrow">{heading}</p>
+  <h1>{display}</h1>
+  <p class="dim">{notes.length} {tt('count.notes')}</p>
+  <div class="card-list">{notes.map((n) => <PostCard note={n} />)}</div>
+</BaseLayout>

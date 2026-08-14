@@ -1,0 +1,23 @@
+---
+import TermPage from '../../components/TermPage.astro';
+import { getTopics, getNotesByTopic } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const [topics, enTopics] = await Promise.all([getTopics('vi'), getTopics('en')]);
+  const enSet = new Set(enTopics.map((x) => x.slug));
+  const out = [];
+  for (const tp of topics) {
+    out.push({
+      params: { slug: tp.slug },
+      props: {
+        notes: await getNotesByTopic('vi', tp.slug),
+        altUrl: enSet.has(tp.slug) ? `/en/topics/${tp.slug}/` : null,
+      },
+    });
+  }
+  return out;
+}
+const { slug } = Astro.params;
+const { notes, altUrl } = Astro.props;
+---
+<TermPage lang="vi" kind="topic" term={slug} notes={notes} altUrl={altUrl} />
