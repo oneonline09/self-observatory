@@ -1,0 +1,55 @@
+# Cấu hình Pages CMS (https://pagescms.org)
+# Trang quản trị: đăng nhập bằng GitHub tại app.pagescms.org, chọn kho self-observatory.
+# File này định nghĩa các "bộ sưu tập" (Field/Insight, VI/EN) và các ô nhập của mỗi bài.
+
+media:
+  input: public/images
+  output: /images
+
+content:
+  - name: field_vi
+    label: "Field Notes — Tiếng Việt"
+    type: collection
+    path: src/content/field/vi
+    filename: "{fields.title}.md"
+    view:
+      fields: [title, date]
+      default:
+        sort: date
+        order: desc
+    fields: &noteFields
+      - { name: title, label: "Tiêu đề", type: string, required: true }
+      - { name: date, label: "Ngày đăng", type: date, required: true, options: { format: "yyyy-MM-dd" } }
+      - { name: summary, label: "Tóm tắt ngắn", type: text }
+      - { name: topics, label: "Chủ đề (topics)", type: string, list: true }
+      - { name: tags, label: "Hashtag (tags)", type: string, list: true }
+      - { name: connections, label: "Bài liên quan (tên file, không .md)", type: string, list: true }
+      - { name: draft, label: "Bản nháp (chưa đăng)", type: boolean, default: false }
+      - { name: body, label: "Nội dung", type: rich-text }
+  - name: field_en
+    label: "Field Notes — English"
+    type: collection
+    path: src/content/field/en
+    filename: "{fields.title}.md"
+    view:
+      fields: [title, date]
+      default: { sort: date, order: desc }
+    fields: *noteFields
+  - name: insight_vi
+    label: "Insight Notes — Tiếng Việt"
+    type: collection
+    path: src/content/insight/vi
+    filename: "{fields.title}.md"
+    view:
+      fields: [title, date]
+      default: { sort: date, order: desc }
+    fields: *noteFields
+  - name: insight_en
+    label: "Insight Notes — English"
+    type: collection
+    path: src/content/insight/en
+    filename: "{fields.title}.md"
+    view:
+      fields: [title, date]
+      default: { sort: date, order: desc }
+    fields: *noteFields
