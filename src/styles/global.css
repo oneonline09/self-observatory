@@ -10,6 +10,7 @@
   --insight: #8be0c8; /* Insight Notes */
   --topic: #e6a0c4;
   --tag: #f0b866;
+  --journal: #c9a7ff; /* Journal */
   --radius: 14px;
   --maxw: 780px;
   --wide: 1080px;
@@ -182,6 +183,32 @@ main { padding: 40px 0 72px; }
 
 /* ---------- Search ---------- */
 :root { --pagefind-ui-primary: var(--ink); --pagefind-ui-text: var(--ink); --pagefind-ui-background: var(--panel); --pagefind-ui-border: var(--line); --pagefind-ui-tag: var(--panel-2); --pagefind-ui-border-radius: 12px; --pagefind-ui-font: var(--font); }
+
+/* ---------- Journal ---------- */
+.badge.journal { color: var(--journal); border-color: color-mix(in srgb, var(--journal) 45%, transparent); }
+.j-date { font-size: clamp(28px,5vw,40px); margin: 8px 0 2px; letter-spacing: -.02em; font-weight: 700; }
+.j-weekday { color: var(--dim); font-size: 14px; font-variant-numeric: tabular-nums; }
+.j-theme { color: var(--muted); font-style: italic; font-size: 18px; margin: 14px 0 0; }
+.j-streamlabel { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--dim); margin: 28px 0 14px; }
+.jitem { position: relative; border: 1px solid var(--line); border-left: 3px solid var(--kc, var(--line)); border-radius: 12px; background: var(--panel); padding: 18px 20px 16px; margin: 14px 0; }
+.jitem .jtop { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.jkind { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; padding: 2px 9px; border-radius: 6px; border: 1px solid var(--kc); color: var(--kc); }
+.jitem h3 { margin: 0; font-size: 19px; color: var(--ink); font-weight: 600; line-height: 1.35; }
+.jitem h3 a { color: var(--ink); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--kc) 45%, transparent); }
+.jfields { margin-top: 12px; display: flex; flex-direction: column; gap: 12px; }
+.jfield .jlabel { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); display: block; margin-bottom: 2px; }
+.jfield .jval { color: var(--muted); font-size: 15.5px; }
+.jpeople { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+.jperson { font-size: 13px; padding: 2px 9px; border-radius: 999px; background: var(--panel-2); border: 1px solid var(--line); color: var(--ink); }
+.jreflect { border-left: 2px solid var(--kc); padding: 2px 0 2px 14px; }
+.jreflect .jval { color: var(--ink); }
+.k-event { --kc: #7aa2ff; } .k-read { --kc: #8be0c8; } .k-discussion { --kc: #e6a0c4; }
+.k-activity { --kc: #f0b866; } .k-program { --kc: #c9a7ff; } .k-happening { --kc: #f0a58b; } .k-situation { --kc: #7fd1c0; }
+.jcard { display: block; text-decoration: none; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); padding: 16px 20px; margin: 10px 0; transition: border-color .15s, transform .15s; }
+.jcard:hover { border-color: var(--dim); transform: translateY(-1px); text-decoration: none; }
+.jcard .jc-date { color: var(--journal); font-size: 13px; font-variant-numeric: tabular-nums; }
+.jcard .jc-theme { color: var(--ink); margin: 3px 0 0; font-size: 18px; }
+.jcard .jc-kinds { color: var(--dim); font-size: 13.5px; margin-top: 8px; }
 
 /* ---------- Cosmic starfield (nền vũ trụ, site-wide) ---------- */
 .sky {
