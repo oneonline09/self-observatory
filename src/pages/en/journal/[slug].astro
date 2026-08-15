@@ -1,0 +1,11 @@
+---
+import { getJournal } from '../../../lib/journal';
+import JournalLayout from '../../../layouts/JournalLayout.astro';
+
+export async function getStaticPaths() {
+  const entries = await getJournal('en');
+  return entries.map((entry) => ({ params: { slug: entry.slug }, props: { entry } }));
+}
+const { entry } = Astro.props;
+---
+<JournalLayout entry={entry} />
