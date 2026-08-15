@@ -1,0 +1,90 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { t } from '../i18n/ui';
+import { topicUrl, tagUrl } from '../lib/urls';
+import type { JournalEntry } from '../lib/journal';
+import { getJournalTranslation } from '../lib/journal';
+
+interface Props {
+  entry: JournalEntry;
+}
+const { entry } = Astro.props;
+const { lang, data } = entry;
+const tt = t(lang);
+const trans = await getJournalTranslation(entry);
+const altUrl = trans ? trans.url : null;
+
+const locale = lang === 'vi' ? 'vi-VN' : 'en-US';
+const dateStr = data.date.toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric' });
+const weekday = data.date.toLocaleDateString(locale, { weekday: 'long' });
+const pageTitle = data.title || dateStr;
+
+const KIND_KEY = {
+  event: 'jk.event',
+  read: 'jk.read',
+  discussion: 'jk.discussion',
+  activity: 'jk.activity',
+  program: 'jk.program',
+  happening: 'jk.happening',
+  situation: 'jk.situation',
+} as const;
+
+const hasTerms = data.topics.length > 0 || data.tags.length > 0;
+---
+<BaseLayout lang={lang} title={pageTitle} description={data.theme} altUrl={altUrl}>
+  <article class="article">
+    <p class="eyebrow" style="color:var(--journal)">Journal</p>
+    <h1 class="j-date">{data.title || dateStr}</h1>
+    <div class="j-weekday">{weekday}{data.title ? ` · ${dateStr}` : ''}</div>
+    {data.theme && <p class="j-theme">“{data.theme}”</p>}
+
+    {
+      hasTerms && (
+        <div class="chips" style="margin-top:16px">
+          {data.topics.map((x) => <a class="chip topic" href={topicUrl(lang, x)}>{x}</a>)}
+          {data.tags.map((x) => <a class="chip tag" href={tagUrl(lang, x)}>#{x}</a>)}
+        </div>
+      )
+    }
+
+    <div class="j-streamlabel">{tt('journal.inDay')} · {data.items.length} {tt('journal.count')}</div>
+
+    {
+      data.items.map((item) => (
+        <div class={`jitem k-${item.kind}`}>
+          <div class="jtop">
+            <span class="jkind">{tt(KIND_KEY[item.kind])}</span>
+            <h3>
+              {item.link ? (
+                <a href={item.link} target="_blank" rel="noopener">{item.name}</a>
+              ) : (
+                item.name
+              )}
+            </h3>
+          </div>
+          {
+            (item.context || item.occasion || item.people.length > 0 || item.reflection) && (
+              <div class="jfields">
+                {item.context && (
+                  <div class="jfield"><span class="jlabel">{tt('jf.context')}</span><div class="jval">{item.context}</div></div>
+                )}
+                {item.occasion && (
+                  <div class="jfield"><span class="jlabel">{tt('jf.occasion')}</span><div class="jval">{item.occasion}</div></div>
+                )}
+                {item.people.length > 0 && (
+                  <div class="jfield">
+                    <span class="jlabel">{tt('jf.people')}</span>
+                    <div class="jpeople">{item.people.map((p) => <span class="jperson">{p}</span>)}</div>
+                  </div>
+                )}
+                {item.reflection && (
+                  <div class="jfield jreflect"><span class="jlabel">{tt('jf.reflection')}</span><div class="jval">{item.reflection}</div></div>
+                )}
+              </div>
+            )
+          }
+        </div>
+      ))
+    }
+  </article>
+</BaseLayout>
