@@ -1,6 +1,5 @@
 # Cấu hình Pages CMS (https://pagescms.org)
 # Trang quản trị: đăng nhập bằng GitHub tại app.pagescms.org, chọn kho self-observatory.
-# File này định nghĩa các "bộ sưu tập" (Field/Insight, VI/EN) và các ô nhập của mỗi bài.
 
 media:
   input: public/images
@@ -14,18 +13,17 @@ content:
     filename: "{fields.title}.md"
     view:
       fields: [title, date]
-      default:
-        sort: date
-        order: desc
+      default: { sort: date, order: desc }
     fields: &noteFields
       - { name: title, label: "Tiêu đề", type: string, required: true }
-      - { name: date, label: "Ngày đăng", type: date, required: true, options: { format: "yyyy-MM-dd" } }
+      - { name: date, label: "Ngày đăng", type: date, required: true }
       - { name: summary, label: "Tóm tắt ngắn", type: text }
       - { name: topics, label: "Chủ đề (topics)", type: string, list: true }
       - { name: tags, label: "Hashtag (tags)", type: string, list: true }
       - { name: connections, label: "Bài liên quan (tên file, không .md)", type: string, list: true }
       - { name: draft, label: "Bản nháp (chưa đăng)", type: boolean, default: false }
       - { name: body, label: "Nội dung", type: rich-text }
+
   - name: field_en
     label: "Field Notes — English"
     type: collection
@@ -35,6 +33,7 @@ content:
       fields: [title, date]
       default: { sort: date, order: desc }
     fields: *noteFields
+
   - name: insight_vi
     label: "Insight Notes — Tiếng Việt"
     type: collection
@@ -44,6 +43,7 @@ content:
       fields: [title, date]
       default: { sort: date, order: desc }
     fields: *noteFields
+
   - name: insight_en
     label: "Insight Notes — English"
     type: collection
@@ -53,3 +53,51 @@ content:
       fields: [title, date]
       default: { sort: date, order: desc }
     fields: *noteFields
+
+  - name: journal_vi
+    label: "Journal — Tiếng Việt"
+    type: collection
+    path: src/content/journal/vi
+    filename: "{fields.date}.md"
+    view:
+      fields: [date, theme]
+      default: { sort: date, order: desc }
+    fields: &journalFields
+      - { name: date, label: "Ngày", type: date, required: true }
+      - { name: theme, label: "Theme — câu chủ đề của ngày", type: string }
+      - { name: topics, label: "Chủ đề (topics)", type: string, list: true }
+      - { name: tags, label: "Hashtag (tags)", type: string, list: true }
+      - name: items
+        label: "Các mục trong ngày"
+        type: object
+        list: true
+        fields:
+          - name: kind
+            label: "Loại mục"
+            type: select
+            options:
+              values:
+                - { value: event, label: "Sự kiện" }
+                - { value: read, label: "Đọc / Xem" }
+                - { value: discussion, label: "Thảo luận" }
+                - { value: activity, label: "Hoạt động" }
+                - { value: program, label: "Chương trình" }
+                - { value: happening, label: "Điều xảy ra" }
+                - { value: situation, label: "Tình huống" }
+          - { name: name, label: "Tên mục", type: string }
+          - { name: link, label: "Link (tuỳ chọn)", type: string }
+          - { name: context, label: "Bối cảnh (tuỳ chọn)", type: text }
+          - { name: occasion, label: "Cơ duyên (tuỳ chọn)", type: text }
+          - { name: people, label: "Ai trong đó (tuỳ chọn)", type: string, list: true }
+          - { name: reflection, label: "Suy nghĩ (tuỳ chọn)", type: text }
+      - { name: draft, label: "Bản nháp (chưa đăng)", type: boolean, default: false }
+
+  - name: journal_en
+    label: "Journal — English"
+    type: collection
+    path: src/content/journal/en
+    filename: "{fields.date}.md"
+    view:
+      fields: [date, theme]
+      default: { sort: date, order: desc }
+    fields: *journalFields
