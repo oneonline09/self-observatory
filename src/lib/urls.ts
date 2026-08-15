@@ -24,3 +24,5 @@ export const noteUrl = (type: NoteType, lang: Lang, slug: string) =>
   localize(`/${SECTION[type]}/${slug}/`, lang);
 export const topicUrl = (lang: Lang, slug: string) => localize(`/topics/${slug}/`, lang);
 export const tagUrl = (lang: Lang, slug: string) => localize(`/tags/${slug}/`, lang);
+export const journalSectionUrl = (lang: Lang) => localize('/journal/', lang);
+export const journalUrl = (lang: Lang, slug: string) => localize(`/journal/${slug}/`, lang);
