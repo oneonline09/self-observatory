@@ -10,13 +10,13 @@ export const SITE = {
   },
   author: 'Huu Huy',
   // Disqus shortname (tên site trên Disqus). Để trống '' thì phần bình luận tự ẩn.
-  disqusShortname: '',
+  disqusShortname: 'self-observatory',
   // Link mạng xã hội hiện ở footer + dùng cho nút "Thảo luận".
   // Để trống ('') nếu chưa có; nút sẽ tự ẩn.
   social: {
-    facebook: '',   // vd: 'https://facebook.com/yourpage'
-    threads: '',    // vd: 'https://threads.net/@you'
-    x: '',          // vd: 'https://x.com/you'
+    facebook: '',
+    threads: '',
+    x: '',
     email: 'huyhoanghohuu92@gmail.com',
   },
 };
