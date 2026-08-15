@@ -1,7 +1,7 @@
 ---
 import { t } from '../i18n/ui';
 import type { Lang } from '../i18n/ui';
-import { homeUrl, sectionUrl, exploreUrl, aboutUrl, searchUrl } from '../lib/urls';
+import { homeUrl, sectionUrl, exploreUrl, aboutUrl, searchUrl, journalSectionUrl } from '../lib/urls';
 
 interface Props {
   lang: Lang;
@@ -19,6 +19,7 @@ const enUrl = lang === 'en' ? path : altUrl || '/en/';
     <nav class="nav">
       <a href={sectionUrl('field', lang)}>{tt('nav.field')}</a>
       <a href={sectionUrl('insight', lang)}>{tt('nav.insight')}</a>
+      <a href={journalSectionUrl(lang)}>{tt('nav.journal')}</a>
       <a href={exploreUrl(lang)}>{tt('nav.explore')}</a>
       <a href={aboutUrl(lang)}>{tt('nav.about')}</a>
       <a href={searchUrl(lang)}>{tt('nav.search')}</a>
