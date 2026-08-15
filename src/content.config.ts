@@ -29,4 +29,30 @@ const insight = defineCollection({
   schema: noteSchema,
 });
 
-export const collections = { field, insight };
+// Journal: mỗi entry là một ngày; bên trong là danh sách "mục" linh hoạt.
+const journalItem = z.object({
+  kind: z
+    .enum(['event', 'read', 'discussion', 'activity', 'program', 'happening', 'situation'])
+    .default('event'),
+  name: z.string(),
+  link: z.string().optional(),
+  context: z.string().optional(),
+  occasion: z.string().optional(),
+  people: z.array(z.string()).default([]),
+  reflection: z.string().optional(),
+});
+
+const journal = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/journal' }),
+  schema: z.object({
+    title: z.string().optional(),
+    date: z.coerce.date(),
+    theme: z.string().optional(),
+    topics: z.array(z.string()).default([]),
+    tags: z.array(z.string()).default([]),
+    items: z.array(journalItem).default([]),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { field, insight, journal };
