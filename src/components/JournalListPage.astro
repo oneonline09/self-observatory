@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getJournal } from '../lib/journal';
+import { t, type Lang } from '../i18n/ui';
+import { journalSectionUrl } from '../lib/urls';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const tt = t(lang);
+const entries = await getJournal(lang);
+const other: Lang = lang === 'vi' ? 'en' : 'vi';
+const locale = lang === 'vi' ? 'vi-VN' : 'en-US';
+
+const KIND_KEY = {
+  event: 'jk.event',
+  read: 'jk.read',
+  discussion: 'jk.discussion',
+  activity: 'jk.activity',
+  program: 'jk.program',
+  happening: 'jk.happening',
+  situation: 'jk.situation',
+} as const;
+---
+<BaseLayout lang={lang} title={tt('nav.journal')} altUrl={journalSectionUrl(other)}>
+  <p class="eyebrow" style="color:var(--journal)">Journal</p>
+  <h1>{tt('nav.journal')}</h1>
+  <p class="lead">{tt('journal.intro')}</p>
+
+  {
+    entries.length ? (
+      <div style="margin-top:22px">
+        {entries.map((e) => {
+          const dateStr = e.data.date.toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric' });
+          const weekday = e.data.date.toLocaleDateString(locale, { weekday: 'long' });
+          const kinds = [...new Set(e.data.items.map((i) => i.kind))].map((k) => tt(KIND_KEY[k])).join(' · ');
+          return (
+            <a class="jcard" href={e.url}>
+              <div class="jc-date">{dateStr} · {weekday}</div>
+              {e.data.theme ? (
+                <div class="jc-theme">“{e.data.theme}”</div>
+              ) : (
+                e.data.title && <div class="jc-theme">{e.data.title}</div>
+              )}
+              <div class="jc-kinds">{kinds}{kinds ? ' — ' : ''}{e.data.items.length} {tt('journal.count')}</div>
+            </a>
+          );
+        })}
+      </div>
+    ) : (
+      <p class="dim">{tt('journal.empty')}</p>
+    )
+  }
+</BaseLayout>
