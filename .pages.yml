@@ -77,13 +77,13 @@ content:
             type: select
             options:
               values:
-                - { value: event, label: "Sự kiện" }
-                - { value: read, label: "Đọc / Xem" }
-                - { value: discussion, label: "Thảo luận" }
-                - { value: activity, label: "Hoạt động" }
-                - { value: program, label: "Chương trình" }
-                - { value: happening, label: "Điều xảy ra" }
-                - { value: situation, label: "Tình huống" }
+                - { name: event, label: "Sự kiện" }
+                - { name: read, label: "Đọc / Xem" }
+                - { name: discussion, label: "Thảo luận" }
+                - { name: activity, label: "Hoạt động" }
+                - { name: program, label: "Chương trình" }
+                - { name: happening, label: "Điều xảy ra" }
+                - { name: situation, label: "Tình huống" }
           - { name: name, label: "Tên mục", type: string }
           - { name: link, label: "Link (tuỳ chọn)", type: string }
           - { name: context, label: "Bối cảnh (tuỳ chọn)", type: text }
