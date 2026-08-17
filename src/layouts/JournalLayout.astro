@@ -88,3 +88,28 @@ const hasTerms = data.topics.length > 0 || data.tags.length > 0;
     }
   </article>
 </BaseLayout>
+
+<style>
+  /* Giữ đúng cách xuống dòng / ngắt đoạn người viết gõ trong CMS */
+  .jfields { gap: 16px; }
+  .jval {
+    white-space: pre-line;
+    line-height: 1.78;
+    overflow-wrap: anywhere;
+  }
+  /* Bỏ thanh dọc xấu, đổi thành khối bo tròn dịu mắt */
+  .jreflect {
+    border-left: none;
+    padding: 14px 16px;
+    background: color-mix(in srgb, var(--kc, var(--journal)) 8%, var(--panel-2));
+    border: 1px solid color-mix(in srgb, var(--kc, var(--journal)) 22%, transparent);
+    border-radius: 12px;
+  }
+  .jreflect .jlabel {
+    color: color-mix(in srgb, var(--kc, var(--journal)) 65%, var(--muted));
+  }
+  .jreflect .jval {
+    color: var(--ink);
+    font-size: 16px;
+  }
+</style>
