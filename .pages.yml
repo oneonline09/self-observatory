@@ -14,7 +14,7 @@ content:
     view:
       fields: [title, date]
       default: { sort: date, order: desc }
-    fields: &noteFields
+    fields:
       - { name: title, label: "Tiêu đề", type: string, required: true }
       - { name: date, label: "Ngày đăng", type: date, required: true }
       - { name: summary, label: "Tóm tắt ngắn", type: text }
@@ -32,7 +32,15 @@ content:
     view:
       fields: [title, date]
       default: { sort: date, order: desc }
-    fields: *noteFields
+    fields:
+      - { name: title, label: "Tiêu đề", type: string, required: true }
+      - { name: date, label: "Ngày đăng", type: date, required: true }
+      - { name: summary, label: "Tóm tắt ngắn", type: text }
+      - { name: topics, label: "Chủ đề (topics)", type: string, list: true }
+      - { name: tags, label: "Hashtag (tags)", type: string, list: true }
+      - { name: connections, label: "Bài liên quan (tên file, không .md)", type: string, list: true }
+      - { name: draft, label: "Bản nháp (chưa đăng)", type: boolean, default: false }
+      - { name: body, label: "Nội dung", type: rich-text }
 
   - name: insight_vi
     label: "Insight Notes — Tiếng Việt"
@@ -42,7 +50,15 @@ content:
     view:
       fields: [title, date]
       default: { sort: date, order: desc }
-    fields: *noteFields
+    fields:
+      - { name: title, label: "Tiêu đề", type: string, required: true }
+      - { name: date, label: "Ngày đăng", type: date, required: true }
+      - { name: summary, label: "Tóm tắt ngắn", type: text }
+      - { name: topics, label: "Chủ đề (topics)", type: string, list: true }
+      - { name: tags, label: "Hashtag (tags)", type: string, list: true }
+      - { name: connections, label: "Bài liên quan (tên file, không .md)", type: string, list: true }
+      - { name: draft, label: "Bản nháp (chưa đăng)", type: boolean, default: false }
+      - { name: body, label: "Nội dung", type: rich-text }
 
   - name: insight_en
     label: "Insight Notes — English"
@@ -52,7 +68,15 @@ content:
     view:
       fields: [title, date]
       default: { sort: date, order: desc }
-    fields: *noteFields
+    fields:
+      - { name: title, label: "Tiêu đề", type: string, required: true }
+      - { name: date, label: "Ngày đăng", type: date, required: true }
+      - { name: summary, label: "Tóm tắt ngắn", type: text }
+      - { name: topics, label: "Chủ đề (topics)", type: string, list: true }
+      - { name: tags, label: "Hashtag (tags)", type: string, list: true }
+      - { name: connections, label: "Bài liên quan (tên file, không .md)", type: string, list: true }
+      - { name: draft, label: "Bản nháp (chưa đăng)", type: boolean, default: false }
+      - { name: body, label: "Nội dung", type: rich-text }
 
   - name: journal_vi
     label: "Journal — Tiếng Việt"
@@ -62,7 +86,7 @@ content:
     view:
       fields: [date, theme]
       default: { sort: date, order: desc }
-    fields: &journalFields
+    fields:
       - { name: date, label: "Ngày", type: date, required: true }
       - { name: theme, label: "Theme — câu chủ đề của ngày", type: string }
       - { name: topics, label: "Chủ đề (topics)", type: string, list: true }
@@ -100,4 +124,32 @@ content:
     view:
       fields: [date, theme]
       default: { sort: date, order: desc }
-    fields: *journalFields
+    fields:
+      - { name: date, label: "Ngày", type: date, required: true }
+      - { name: theme, label: "Theme — câu chủ đề của ngày", type: string }
+      - { name: topics, label: "Chủ đề (topics)", type: string, list: true }
+      - { name: tags, label: "Hashtag (tags)", type: string, list: true }
+      - name: items
+        label: "Các mục trong ngày"
+        type: object
+        list: true
+        fields:
+          - name: kind
+            label: "Loại mục"
+            type: select
+            options:
+              values:
+                - { name: event, label: "Sự kiện" }
+                - { name: read, label: "Đọc / Xem" }
+                - { name: discussion, label: "Thảo luận" }
+                - { name: activity, label: "Hoạt động" }
+                - { name: program, label: "Chương trình" }
+                - { name: happening, label: "Điều xảy ra" }
+                - { name: situation, label: "Tình huống" }
+          - { name: name, label: "Tên mục", type: string }
+          - { name: link, label: "Link (tuỳ chọn)", type: string }
+          - { name: context, label: "Bối cảnh (tuỳ chọn)", type: text }
+          - { name: occasion, label: "Cơ duyên (tuỳ chọn)", type: text }
+          - { name: people, label: "Ai trong đó (tuỳ chọn)", type: string, list: true }
+          - { name: reflection, label: "Suy nghĩ (tuỳ chọn)", type: text }
+      - { name: draft, label: "Bản nháp (chưa đăng)", type: boolean, default: false }
