@@ -34,7 +34,7 @@ const journalItem = z.object({
   kind: z
     .enum(['event', 'read', 'discussion', 'activity', 'program', 'happening', 'situation'])
     .default('event'),
-  name: z.string(),
+  name: z.string().optional(),
   link: z.string().optional(),
   context: z.string().optional(),
   occasion: z.string().optional(),
