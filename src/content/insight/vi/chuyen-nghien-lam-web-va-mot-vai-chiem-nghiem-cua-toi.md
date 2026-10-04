@@ -1,0 +1,24 @@
+---
+translationKey: chuyen-nghien-lam-web-va-mot-vai-chiem-nghiem-cua-toi
+title: Chuyện "nghiện" làm web và một vài chiêm nghiệm của tôi
+date: 2026-10-05
+summary: Mấy hôm nay mãi tập trung làm web, nên tự dưng tôi nhận ra một vài điều thú vị về giá trị của việc có một điều gì đó khiến mình "mất ăn mất ngủ" để phát triển nó.
+topics:
+  - hieu-minh
+  - quy-luat-con-nguoi
+tags:
+  - phan-tu
+draft: false
+---
+
+Mấy hôm nay tôi phát triển website cho cả cộng đồng xài. Điều thú vị là hầu như tôi không có tách khỏi nó được. Đi đâu, làm gì tôi cũng nghĩ đến cách cải thiện, phát triển nó tốt hơn, xịn hơn, hiệu quả hơn và đẹp hơn. Tôi không nghĩ là trước giờ tôi từng trải qua chuyện này,
+
+Hồi trước tôi hay tự nói: "_giá như có cái thứ gì đó để tôi tập trung vào, tôi sẽ dành hết tâm trí để mà làm nó tuyệt hảo nhất"_. Tôi cứ nói hoài, mà chưa tìm ra cái gì khiến tôi say mê như điếu đổ như vậy. [nhân tiện, say mê như điếu đổ là sao nhỉ, cái từ này đâu ra?] Nay bỗng nhiên tôi chợ phát hiện ra chuyện phát triển website là cái thứ khiến tôi phải nói là mất ăn mất ngủ. Tôi viết cái bài này lúc 5 giờ 10 phút sáng nè, sau khi cả đêm không ngủ được. Cứ nằm là thế nào cũng có hàng tá ý tưởng, suy nghĩ lởn vởn quanh đầu, để mà tôi tha hồ mường tượng, hình dung, động não. 
+
+Tuy làm nó mệt, nhưng tôi thật sự thấy sung sướng khi cái website ngày càng xịn, đẹp hơn, nhiều công năng hơn. Mà vui lắm nhé. Thi thoảng tôi sẽ va vào cái bức tường bí bách nào đó, nên tôi mệt lắm, muốn dẹp nó đi. Nhưng tắt một hồi, đi đâu đó, làm cái gì khác, né một bên, rồi quay lại, thế là bằng cách nào đó tôi đã giải quyết được. Một phần là nhờ AI giờ mạnh mẽ thông minh xuất chúng lắm rồi, một phần là tôi hết bị mệt, tâm trí có thể tập trung lại được sau nghỉ ngơi. Haha, kiểu yêu-ghét vậy đó. Nhưng sau cùng vẫn là yêu mà thôi, không yêu sẽ không đi đến đến cùng đâu, haha, dẫu có ghét hay không hài lòng đi chăng nữa, đấy cũng là những nốt thăng trầm trên hành trình phát triển mà thôi. Cái gì cũng thế cả.
+
+Điều quan trọng là tôi thật sự thấy được việc có một điều gì đó khiến bản thân mất ăn mất ngủ (theo nghĩa tích cực) là một đặc ân. Vì nó dần trở nên là một nguồn sống, một sở thích, đam mê, và là một thứ giá trị tôi tạo ra được. Tôi nghĩ có lẽ Einstein cũng mê mẫn với cái đống ánh sáng lởn lởn trong đầu, hay Newton không ngừng nghĩ suy về tương tác giữa vạn vật với nhau. Rồi tự nhiên tôi nhớ đến cụ Duy Cần: **_"Thiên tài chỉ là sự nhẫn nại lâu ngày mà thôi"_**. Ý ở đây là chuyện khó gì cũng làm được, cũng giải quyết được, miễn là làm đến cùng, bền bỉ, từ tốn rồi sẽ đâu vào đó. Đấy là cái thứ tôi cần. Và tôi nghĩ ai cũng cần. 
+
+Kể từ khi đâm đầu vào cái website, tôi dường như hiểu được cách bộ não và con người mình vận hành. Cứ làm một mạch không nghỉ gì cả, xong thì căng đầu, bí bách, bối rối; thế là nghỉ, đi chơi, vận động, đi bơi, nói chuyện hay làm cái gì đó vận động. Có cảm hứng hay tập trung lại tốt rồi thì cứ quay lại cái thứ ta bỏ dở lưng chừng. Cứ túc tắc, mà tập trung như thế, vậy mà cái gì cũng xong xuôi cả. Điều thú vị là khi làm mà tâm mình không màng đến chuyện được mất, hơn thua, khó dễ; mà chỉ tập trung vào chuyện cải tiến, sửa lỗi, nâng cấp, là một trải nghiệm lạ lùng với tôi. Dường như tôi bước ra khỏi cái cõi nhị nguyên, tính toàn thiệt hơn lâu ngày của loài người hiện nay - những thứ khiến tôi nhức đầu, choáng váng, co rúm, mệt mỏi, cạn kiện sức lực và thể lực - để đi vào cõi siêu hình của cái đam mê, của cái hứng khởi ban sơ mà mậu nhiệm: thứ mà tôi cho rằng là một món quà thượng đến gửi gắm cho loài người, đến trái đất mà làm cho nó đẹp hơn, hay hơn, giàu có hơn. Tiếc là đi học, đi làm một chặp, chúng ta mất hết cái của quý trời trao đó; nói đúng ra là chúng bị mài mòn đi, héo úa, tàn phai, lay lắt bên trong ta. Tuy thế, nó vẫn tồn tại, như cách ngọn lửa cháy âm ỉ chỉ chực chờ tàn lụi; mà lạ cái là nó không bao giờ tắt. Chỉ cần một chút củi khô, một vài làn gió mới, là chúng lại bùng lên; dẫu cho có vẻ như đã tắt hẳn rồi.
+
+Vậy đó, nếu như bạn đọc được bài này, thấy mình như cái xác khô thì cũng đừng lo, điều quan trọng là bạn nên biết là cái nguồn sống rực rỡ trong bạn chỉ là bị vùi dập không ít trong quá trình lớn lên thôi. Nó chỉ cần bạn chăm bẵm nó một chút, để ý đến một chút, rồi bắt lấy nó mỗi khi lên tiếng kêu yếu ớt - để cho nó được hiện hữu, được hiện thân ở thế giới này - qua cái con người tuyệt diệu của bạn. Mới đầu bạn sẽ không quen đâu, vì nó lạ lẫm quá với con người chân thật của bạn; có khi bạn còn nghi kị, gạt bỏ, lề hóa, đóng khung và đối xử tệ bạc với ngọn lửa bên trong mình. Nhưng bạn ơi, đừng sợ, hãy nghe nó đi, nó là sự cứu rỗi mà ông bà, tổ tiên, thượng đến gửi đến bạn đấy. Bạn không tin tôi cũng được, nhưng hãy thử để ý đến cái giọng nói bên trong mình đi, xem thử nó nói gì với bạn nào, rồi bạn quyết định thế nào cũng được. Điều quan trọng là bạn tách ra khỏi cái bi quan, yếm thế, tiêu cực của mình để mà kết nối với cái giọng nói trí tuệ bên trong bạn. Cứ thử đi, xem thế nào!
