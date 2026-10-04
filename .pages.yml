@@ -1,4 +1,6 @@
-# Cấu hình Pages CMS (https://pagescms.org)
+# Cấu hình Pages CMS (https://pagescms.org) — TRÌNH SOẠN THẢO CŨ, giữ lại làm dự phòng.
+# Trình soạn thảo chính bây giờ là Sveltia CMS tại /admin/ (cấu hình: public/admin/config.yml).
+# Lưu ý: bài tạo bằng Pages CMS không tự nối bản dịch vi/en và không dùng danh mục chủ đề/hashtag.
 # Trang quản trị: đăng nhập bằng GitHub tại app.pagescms.org, chọn kho self-observatory.
 
 media:

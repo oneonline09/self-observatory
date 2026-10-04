@@ -3,22 +3,43 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PostCard from './PostCard.astro';
 import { t, type Lang } from '../i18n/ui';
 import type { Note } from '../lib/content';
+import type { JournalEntry } from '../lib/journal';
+import { getTermLabels } from '../lib/terms';
 
 interface Props {
   lang: Lang;
   kind: 'topic' | 'tag';
   term: string;
   notes: Note[];
+  journal?: JournalEntry[];
   altUrl: string | null;
 }
-const { lang, kind, term, notes, altUrl } = Astro.props;
+const { lang, kind, term, notes, journal = [], altUrl } = Astro.props;
 const tt = t(lang);
+const terms = await getTermLabels();
 const heading = kind === 'topic' ? tt('topic.heading') : tt('tag.heading');
-const display = kind === 'tag' ? `#${term}` : term;
+const name = terms.label(kind, term, lang);
+const display = kind === 'tag' ? `#${name}` : name;
+const locale = lang === 'vi' ? 'vi-VN' : 'en-US';
 ---
 <BaseLayout lang={lang} title={display} altUrl={altUrl}>
   <p class="eyebrow">{heading}</p>
   <h1>{display}</h1>
-  <p class="dim">{notes.length} {tt('count.notes')}</p>
+  <p class="dim">{notes.length + journal.length} {tt('count.notes')}</p>
   <div class="card-list">{notes.map((n) => <PostCard note={n} />)}</div>
+  {
+    journal.length > 0 && (
+      <div style="margin-top:22px">
+        <p class="eyebrow" style="color:var(--journal)">Journal</p>
+        {journal.map((e) => (
+          <a class="jcard" href={e.url}>
+            <div class="jc-date">
+              {e.data.date.toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric' })}
+            </div>
+            {(e.data.theme || e.data.title) && <div class="jc-theme">{e.data.theme ? `“${e.data.theme.trim()}”` : e.data.title}</div>}
+          </a>
+        ))}
+      </div>
+    )
+  }
 </BaseLayout>

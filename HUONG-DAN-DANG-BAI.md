@@ -111,8 +111,16 @@ Không cần cài gì trên máy, không cần Terminal — tất cả làm trê
 
 ---
 
-## 6. Muốn quản lý bằng giao diện dễ hơn? (tuỳ chọn, làm sau)
+## 6. Viết bằng trình soạn thảo trên web (Sveltia CMS)
 
-Nếu ngại sửa Markdown thô, sau này có thể gắn một **CMS miễn phí** (ví dụ Sveltia CMS / Pages
-CMS) — cho bạn một trang quản trị dạng biểu mẫu: điền tiêu đề, nội dung, bấm Lưu, nó tự tạo file
-và đăng. Giống viết bài trên một trang admin nhẹ. Khi nào bạn muốn, mình gắn thêm.
+Mở **https://self-observatory.pages.dev/admin/** → **Sign In Using Access Token** → dán token GitHub (chỉ cần làm một lần trên mỗi trình duyệt).
+
+- **Viết song song hai ngôn ngữ:** khung trái là Tiếng Việt, khung phải bấm **English** (thay cho Preview) để viết bản tiếng Anh cùng lúc. Nút 文A ở đầu mỗi khung để **chép** hoặc **dịch** nội dung từ ngôn ngữ kia (dịch tự động cần nhập API key một lần trong phần cài đặt).
+- **Tự lưu nháp:** đang viết dở mà đóng trang, lần sau mở lại CMS sẽ hỏi có khôi phục bản nháp không. Bản nháp này chỉ nằm trong trình duyệt đang dùng.
+- **Chưa muốn đăng:** bật **Bản nháp (chưa đăng)** rồi Save. Bài được lưu vào kho nhưng không hiện trên trang.
+- **Chủ đề / Hashtag:** chọn từ danh sách có sẵn. Muốn thêm mới thì vào mục **Chủ đề (Topics)** hoặc **Hashtag (Tags)** ở cột trái, tạo một lần (tên tiếng Việt + tên tiếng Anh), lần sau chỉ cần chọn.
+- **Bài liên quan:** chọn các bài khác trong cùng mục; chúng hiện ở cuối bài và thành đường nối trên bản đồ chòm sao.
+- **Định dạng:** đậm, nghiêng, gạch ngang, link, tiêu đề, trích dẫn, danh sách. Markdown không có gạch chân; nếu thật cần thì chuyển sang chế độ Markdown và gõ `<u>chữ</u>`.
+- **Save = đăng:** mỗi lần Save là một commit, trang tự cập nhật sau khoảng 1–2 phút.
+
+Pages CMS (app.pagescms.org) vẫn dùng được như phương án dự phòng, nhưng bài tạo ở đó không tự nối bản dịch và không dùng danh sách chủ đề/hashtag.

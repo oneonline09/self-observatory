@@ -1,4 +1,5 @@
 ---
+translationKey: mot-cuoc-hen-bi-huy-giup-toi-hieu-hon-ve-tam-ly-tu-duy-va-gia-tri-cua-toi-nhu-the-nao
 title: Một "cuộc hẹn bị hủy" giúp tôi hiểu hơn về tâm lý, tư duy và giá trị của
   tôi như thế nào?
 date: 2026-09-22
@@ -8,8 +9,8 @@ summary: Từ một sự kiện nhỏ trong ngày, tôi phản tư về cách t�
   tiếp, cảm giác bị phớt lờ, không được quan tâm, không được quan trọng bên
   trong tôi.
 topics:
-  - thành thật với chính mình
-  - Hiểu mình
+  - thanh-that-voi-chinh-minh
+  - hieu-minh
 draft: false
 ---
 Okay, giờ t sẽ viết lại và chiêm nghiệm về một tình huống mới gặp phải hôm nay. Bản chất việc này không là vấn đề lớn gì hết. Nó là chuyện bé cỏn con thôi. Nhưng lại là một pha kích hoạt cảm xúc tiêu cực bên trong tôi. Và tôi biết tỏng nó hoạt động như thế nào.
