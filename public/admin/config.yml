@@ -1,0 +1,273 @@
+# Sveltia CMS — https://sveltiacms.app
+# Trang quản trị: https://self-observatory.pages.dev/admin/
+# Mọi thay đổi ở đây phải khớp với schema trong src/content.config.ts.
+
+backend:
+  name: github
+  repo: oneonline09/self-observatory
+  branch: main
+  # Đăng nhập bằng access token của GitHub (chưa cài OAuth).
+  auth_methods: [token]
+
+app_title: Self Observatory
+site_url: https://self-observatory.pages.dev
+
+media_folder: public/images
+public_folder: /images
+
+# Tiếng Việt là bản gốc, tiếng Anh viết song song trong cùng một màn hình.
+# Mỗi ngôn ngữ có file riêng: src/content/<mục>/vi/… và src/content/<mục>/en/…
+i18n:
+  structure: multiple_folders
+  locales: [vi, en]
+  default_locale: vi
+  # Bài mới bật cả hai ngôn ngữ; có thể tắt bản English cho từng bài ngay trong trình soạn thảo.
+  initial_locales: all
+
+slug:
+  encoding: ascii
+  clean_accents: true
+  maxlength: 80
+
+output:
+  # Trường tuỳ chọn để trống thì không ghi ra file (giữ frontmatter gọn, đúng schema).
+  omit_empty_optional_fields: true
+
+collections:
+  - name: field
+    label: "Field Notes"
+    label_singular: "Field Note"
+    icon: travel_explore
+    folder: src/content/field
+    slug: "{{title | localize}}"
+    summary: "{{title}}"
+    sortable_fields: { fields: [date, title], default: { field: date, direction: descending } }
+    preview_path: "{{locale}}/field-notes/{{slug}}/"
+    i18n: true
+    fields:
+      - { name: title, label: "Tiêu đề", widget: string, i18n: true }
+      - { name: date, label: "Ngày đăng", widget: datetime, type: date, default: "{{now}}", i18n: duplicate }
+      - { name: summary, label: "Tóm tắt ngắn", widget: text, required: false, i18n: true }
+      - name: topics
+        label: "Chủ đề (topics)"
+        hint: "Chọn từ danh sách. Chưa có thì thêm ở mục Chủ đề bên trái rồi quay lại."
+        widget: relation
+        collection: topics
+        value_field: "{{slug}}"
+        display_fields: ["{{vi}} · {{en}}"]
+        search_fields: [vi, en]
+        multiple: true
+        dropdown_threshold: 0
+        required: false
+        i18n: duplicate
+      - name: tags
+        label: "Hashtag (tags)"
+        hint: "Chọn từ danh sách. Chưa có thì thêm ở mục Hashtag bên trái rồi quay lại."
+        widget: relation
+        collection: tags
+        value_field: "{{slug}}"
+        display_fields: ["{{vi}} · {{en}}"]
+        search_fields: [vi, en]
+        multiple: true
+        dropdown_threshold: 0
+        required: false
+        i18n: duplicate
+      - name: connections
+        label: "Bài liên quan"
+        hint: "Nối có chủ đích tới các bài khác cùng mục. Hiện ở cuối bài và trên bản đồ chòm sao."
+        widget: relation
+        collection: field
+        value_field: "{{slug}}"
+        display_fields: [title]
+        search_fields: [title, summary]
+        multiple: true
+        dropdown_threshold: 0
+        required: false
+        i18n: duplicate
+      - { name: discuss, label: "Link thảo luận (bài đăng mạng xã hội)", widget: string, type: url, required: false, i18n: true }
+      - { name: draft, label: "Bản nháp (chưa đăng)", widget: boolean, default: false, required: false, i18n: true }
+      - name: body
+        label: "Nội dung"
+        widget: richtext
+        i18n: true
+
+  - name: insight
+    label: "Insight Notes"
+    label_singular: "Insight Note"
+    icon: self_improvement
+    folder: src/content/insight
+    slug: "{{title | localize}}"
+    summary: "{{title}}"
+    sortable_fields: { fields: [date, title], default: { field: date, direction: descending } }
+    preview_path: "{{locale}}/insight-notes/{{slug}}/"
+    i18n: true
+    fields:
+      - { name: title, label: "Tiêu đề", widget: string, i18n: true }
+      - { name: date, label: "Ngày đăng", widget: datetime, type: date, default: "{{now}}", i18n: duplicate }
+      - { name: summary, label: "Tóm tắt ngắn", widget: text, required: false, i18n: true }
+      - name: topics
+        label: "Chủ đề (topics)"
+        hint: "Chọn từ danh sách. Chưa có thì thêm ở mục Chủ đề bên trái rồi quay lại."
+        widget: relation
+        collection: topics
+        value_field: "{{slug}}"
+        display_fields: ["{{vi}} · {{en}}"]
+        search_fields: [vi, en]
+        multiple: true
+        dropdown_threshold: 0
+        required: false
+        i18n: duplicate
+      - name: tags
+        label: "Hashtag (tags)"
+        hint: "Chọn từ danh sách. Chưa có thì thêm ở mục Hashtag bên trái rồi quay lại."
+        widget: relation
+        collection: tags
+        value_field: "{{slug}}"
+        display_fields: ["{{vi}} · {{en}}"]
+        search_fields: [vi, en]
+        multiple: true
+        dropdown_threshold: 0
+        required: false
+        i18n: duplicate
+      - name: connections
+        label: "Bài liên quan"
+        hint: "Nối có chủ đích tới các bài khác cùng mục. Hiện ở cuối bài và trên bản đồ chòm sao."
+        widget: relation
+        collection: insight
+        value_field: "{{slug}}"
+        display_fields: [title]
+        search_fields: [title, summary]
+        multiple: true
+        dropdown_threshold: 0
+        required: false
+        i18n: duplicate
+      - { name: discuss, label: "Link thảo luận (bài đăng mạng xã hội)", widget: string, type: url, required: false, i18n: true }
+      - { name: draft, label: "Bản nháp (chưa đăng)", widget: boolean, default: false, required: false, i18n: true }
+      - name: body
+        label: "Nội dung"
+        widget: richtext
+        i18n: true
+
+  - name: journal
+    label: "Journal"
+    label_singular: "Journal"
+    icon: calendar_today
+    folder: src/content/journal
+    identifier_field: date
+    slug: "{{fields.date}}"
+    summary: "{{date}} — {{theme}}"
+    sortable_fields: { fields: [date], default: { field: date, direction: descending } }
+    preview_path: "{{locale}}/journal/{{slug}}/"
+    i18n: true
+    fields:
+      - { name: date, label: "Ngày", widget: datetime, type: date, default: "{{now}}", i18n: duplicate }
+      - { name: theme, label: "Theme — câu chủ đề của ngày", widget: string, required: false, i18n: true }
+      - name: topics
+        label: "Chủ đề (topics)"
+        hint: "Chọn từ danh sách. Chưa có thì thêm ở mục Chủ đề bên trái rồi quay lại."
+        widget: relation
+        collection: topics
+        value_field: "{{slug}}"
+        display_fields: ["{{vi}} · {{en}}"]
+        search_fields: [vi, en]
+        multiple: true
+        dropdown_threshold: 0
+        required: false
+        i18n: duplicate
+      - name: tags
+        label: "Hashtag (tags)"
+        hint: "Chọn từ danh sách. Chưa có thì thêm ở mục Hashtag bên trái rồi quay lại."
+        widget: relation
+        collection: tags
+        value_field: "{{slug}}"
+        display_fields: ["{{vi}} · {{en}}"]
+        search_fields: [vi, en]
+        multiple: true
+        dropdown_threshold: 0
+        required: false
+        i18n: duplicate
+      - name: items
+        label: "Các mục trong ngày"
+        label_singular: "mục"
+        widget: list
+        required: false
+        i18n: true
+        collapsed: auto
+        summary: "{{kind}} — {{name}}"
+        fields:
+          - name: kind
+            label: "Loại mục"
+            widget: select
+            default: event
+            i18n: true
+            options:
+              - { value: event, label: "Sự kiện" }
+              - { value: read, label: "Đọc / Xem" }
+              - { value: discussion, label: "Thảo luận" }
+              - { value: activity, label: "Hoạt động" }
+              - { value: program, label: "Chương trình" }
+              - { value: happening, label: "Điều xảy ra" }
+              - { value: situation, label: "Tình huống" }
+          - { name: name, label: "Tên mục", widget: string, required: false, i18n: true }
+          - { name: link, label: "Link", widget: string, required: false, i18n: true }
+          - name: context
+            label: "Bối cảnh"
+            widget: richtext
+            minimal: true
+            buttons: [bold, italic, strikethrough, link, quote, bulleted-list, numbered-list]
+            editor_components: []
+            required: false
+            i18n: true
+          - name: occasion
+            label: "Cơ duyên"
+            widget: richtext
+            minimal: true
+            buttons: [bold, italic, strikethrough, link, quote, bulleted-list, numbered-list]
+            editor_components: []
+            required: false
+            i18n: true
+          - name: people
+            label: "Ai trong đó"
+            widget: list
+            required: false
+            i18n: true
+          - name: reflection
+            label: "Suy nghĩ"
+            widget: richtext
+            buttons: [bold, italic, strikethrough, link, quote, bulleted-list, numbered-list]
+            editor_components: []
+            required: false
+            i18n: true
+      - { name: draft, label: "Bản nháp (chưa đăng)", widget: boolean, default: false, required: false, i18n: true }
+
+  - divider: true
+
+  - name: topics
+    label: "Chủ đề (Topics)"
+    label_singular: "chủ đề"
+    description: "Danh sách chủ đề dùng chung. Thêm một lần, lần sau chỉ cần chọn."
+    icon: category
+    folder: src/content/topics
+    extension: yml
+    format: yaml
+    identifier_field: vi
+    slug: { template: "{{vi}}", editable: [create] }
+    summary: "{{vi}} · {{en}}"
+    fields:
+      - { name: vi, label: "Tên tiếng Việt", widget: string }
+      - { name: en, label: "English name", widget: string, required: false }
+
+  - name: tags
+    label: "Hashtag (Tags)"
+    label_singular: "hashtag"
+    description: "Danh sách hashtag dùng chung. Thêm một lần, lần sau chỉ cần chọn."
+    icon: tag
+    folder: src/content/tags
+    extension: yml
+    format: yaml
+    identifier_field: vi
+    slug: { template: "{{vi}}", editable: [create] }
+    summary: "{{vi}} · {{en}}"
+    fields:
+      - { name: vi, label: "Tên tiếng Việt", widget: string }
+      - { name: en, label: "English name", widget: string, required: false }

@@ -1,4 +1,5 @@
 ---
+translationKey: mot-cuoc-tro-chuyen-ve-chuyen-tinh-nguyen-noi-gi-ve-toi-va-nguoi-khac
 title: What Does a Conversation About Volunteering Reveal About Me and Others?
 date: 2026-09-22
 summary: A reflection on a conversation about building a library. For me, it was
@@ -6,9 +7,10 @@ summary: A reflection on a conversation about building a library. For me, it was
   much about the ways I think, the beliefs I hold, my attitudes toward others,
   and the assumptions we each carry.
 topics:
-  - Self-understanding
+  - hieu-minh
+  - thanh-that-voi-chinh-minh
 tags:
-  - Reflection
+  - phan-tu
 draft: false
 ---
 Yesterday, something happened that made me feel ashamed of myself.

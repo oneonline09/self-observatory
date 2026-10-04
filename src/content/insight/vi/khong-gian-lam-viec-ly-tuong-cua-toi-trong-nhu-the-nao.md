@@ -1,9 +1,10 @@
 ---
+translationKey: khong-gian-lam-viec-ly-tuong-cua-toi-trong-nhu-the-nao
 title: Không gian làm việc lý tưởng của tôi trông như thế nào?
 date: 2026-09-16
 summary: Chiêm nghiệm về không gian làm việc lý tưởng của tôi
 topics:
-  - Hiểu mình
+  - hieu-minh
 draft: false
 ---
 Tôi nhận ra rằng mình chỉ có thể làm việc tốt khi xung quanh không có ai. 

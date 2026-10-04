@@ -1,4 +1,5 @@
 ---
+translationKey: mot-cuoc-tro-chuyen-ve-chuyen-tinh-nguyen-noi-gi-ve-toi-va-nguoi-khac
 title: Một cuộc trò chuyện về chuyện tình nguyện nói gì về tôi và người khác?
 date: 2026-09-22
 summary: suy nghĩ và chiêm nghiệm về một cuộc trò chuyện liên quan đến cái thư
@@ -6,10 +7,10 @@ summary: suy nghĩ và chiêm nghiệm về một cuộc trò chuyện liên qua
   duy, niềm tin, thái độ của mình và của người khác. Bài này là chiêm nghiệm về
   một sự việc tôi đã trải qua
 topics:
-  - Hiểu mình
-  - thành thật với chính mình
+  - hieu-minh
+  - thanh-that-voi-chinh-minh
 tags:
-  - Phản tư
+  - phan-tu
 draft: false
 ---
 Hôm qua có một sự việc khiến tôi cảm thấy tự xấu hổ. Một là vì tôi thấy tôi có thể im cái mồm đi, không nói gì hết. Hai là tôi đã có thể xin lỗi và nhận cái ngu của mình ngay lúc đó. Ba là tôi không đủ sự nhận thức để mà sửa cái lỗi đó. Nay tôi viết lại để mà ghi nhớ, hòng không có mắc phải trong những lần tới nữa.

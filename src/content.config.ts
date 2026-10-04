@@ -5,13 +5,17 @@ import { glob } from 'astro/loaders';
 // lang + slug được suy ra từ đường dẫn file (vd: "vi/a-note.md"),
 // nên KHÔNG cần khai báo trong frontmatter.
 const noteSchema = z.object({
+  // Khoá nối bản dịch: hai file vi/en có cùng translationKey là một bài.
+  // CMS (Sveltia) tự ghi khoá này = slug của bản tiếng Việt.
+  translationKey: z.string().optional(),
   title: z.string(),
   date: z.coerce.date(),
   updated: z.coerce.date().optional(),
   summary: z.string().default(''),
+  // id của chủ đề / hashtag — xem src/content/topics và src/content/tags
   topics: z.array(z.string()).default([]),
   tags: z.array(z.string()).default([]),
-  // slug của các bài liên quan (cùng type), nối có chủ đích
+  // translationKey (= slug bản tiếng Việt) của các bài liên quan cùng type
   connections: z.array(z.string()).default([]),
   // link tới bài đăng mạng xã hội nơi diễn ra thảo luận (tuỳ chọn)
   discuss: z.string().url().optional(),
@@ -55,4 +59,21 @@ const journal = defineCollection({
   }),
 });
 
-export const collections = { field, insight, journal };
+// Danh mục chủ đề / hashtag dùng chung cho cả hai ngôn ngữ.
+// Mỗi file = một mục; tên file là id (dùng trong URL), bên trong là nhãn vi/en.
+const termSchema = z.object({
+  vi: z.string(),
+  en: z.string().optional(),
+});
+
+const topics = defineCollection({
+  loader: glob({ pattern: '**/*.{yml,yaml}', base: './src/content/topics' }),
+  schema: termSchema,
+});
+
+const tags = defineCollection({
+  loader: glob({ pattern: '**/*.{yml,yaml}', base: './src/content/tags' }),
+  schema: termSchema,
+});
+
+export const collections = { field, insight, journal, topics, tags };

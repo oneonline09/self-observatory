@@ -1,4 +1,5 @@
 ---
+translationKey: mot-cuoc-hen-bi-huy-giup-toi-hieu-hon-ve-tam-ly-tu-duy-va-gia-tri-cua-toi-nhu-the-nao
 title: How Did a Cancelled Plan Help Me Understand My Psychology, Thinking, and
   Values Better?
 date: 2026-09-23
@@ -9,7 +10,8 @@ summary: From a small event that happened today, I found myself reflecting on
   again. At the heart of this reflection is communication, and the feeling of
   being ignored, overlooked, or not considered important.
 topics:
-  - Self-understanding
+  - thanh-that-voi-chinh-minh
+  - hieu-minh
 draft: false
 ---
 Okay, now I want to write down and reflect on a situation that happened today. In itself, it really wasn't a big deal. It was just a tiny, insignificant thing. But somehow, it triggered some negative emotions inside me. And I know pretty well how this mechanism works.

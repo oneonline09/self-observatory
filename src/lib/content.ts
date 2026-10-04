@@ -1,13 +1,15 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import type { Lang } from '../i18n/ui';
 import { noteUrl, topicUrl, tagUrl, type NoteType } from './urls';
+import { getTermLabels } from './terms';
 
 export type { NoteType } from './urls';
 
 export interface Note {
   type: NoteType;
   lang: Lang;
-  slug: string; // dùng chung cho cả 2 ngôn ngữ -> để ghép bản dịch
+  slug: string; // slug trong URL (mỗi ngôn ngữ có thể khác nhau)
+  key: string; // translationKey: dùng chung cho cả 2 ngôn ngữ -> ghép bản dịch + connections
   url: string;
   entry: CollectionEntry<'field'> | CollectionEntry<'insight'>;
   data: CollectionEntry<'field'>['data'];
@@ -23,7 +25,8 @@ function normalize(
   const lang = parts[0] as Lang;
   const slug = parts.slice(1).join('/');
   if (lang !== 'vi' && lang !== 'en') return null;
-  return { type, lang, slug, url: noteUrl(type, lang, slug), entry, data: entry.data };
+  const key = entry.data.translationKey || slug;
+  return { type, lang, slug, key, url: noteUrl(type, lang, slug), entry, data: entry.data };
 }
 
 let _cache: Note[] | null = null;
@@ -63,11 +66,17 @@ export async function getNote(
   return all.find((n) => n.type === type && n.lang === lang && n.slug === slug);
 }
 
-// Bản dịch của một note = cùng type + slug nhưng khác lang
+// Bản dịch của một note = cùng type + key (translationKey, hoặc slug nếu chưa có) nhưng khác lang
 export async function getTranslation(note: Note): Promise<Note | undefined> {
   const other: Lang = note.lang === 'vi' ? 'en' : 'vi';
-  return getNote(note.type, other, note.slug);
+  const all = await getAllNotes();
+  return all.find((n) => n.type === note.type && n.lang === other && n.key === note.key);
 }
+
+// connections lưu key của bài (cũ: slug) -> khớp cả hai
+const isConnected = (from: Note, to: Note) =>
+  from.type === to.type &&
+  (from.data.connections.includes(to.key) || from.data.connections.includes(to.slug));
 
 export interface TermCount {
   slug: string;
@@ -107,7 +116,7 @@ export async function getConnectedNotes(note: Note, limit = 6): Promise<Note[]> 
     if (other.type === note.type && other.slug === note.slug) continue;
     byKey.set(keyOf(other), other);
     let score = 0;
-    if (note.type === other.type && note.data.connections.includes(other.slug)) score += 100;
+    if (isConnected(note, other)) score += 100;
     score += note.data.topics.filter((x) => other.data.topics.includes(x)).length * 3;
     score += note.data.tags.filter((x) => other.data.tags.includes(x)).length * 2;
     if (score > 0) scores.set(keyOf(other), score);
@@ -143,6 +152,8 @@ export async function buildGraph(lang: Lang): Promise<Graph> {
   const seenTerm = new Set<string>();
   const noteId = (n: Note) => `note:${n.type}:${n.slug}`;
 
+  const terms = await getTermLabels();
+
   for (const n of notes) {
     nodes.push({ id: noteId(n), label: n.data.title, type: n.type, url: n.url });
   }
@@ -152,7 +163,7 @@ export async function buildGraph(lang: Lang): Promise<Graph> {
     const id = `${kind}:${slug}`;
     if (!seenTerm.has(id)) {
       seenTerm.add(id);
-      nodes.push({ id, label: (kind === 'tag' ? '#' : '') + slug, type: kind, url });
+      nodes.push({ id, label: (kind === 'tag' ? '#' : '') + terms.label(kind, slug, lang), type: kind, url });
     }
     return id;
   };
@@ -168,11 +179,10 @@ export async function buildGraph(lang: Lang): Promise<Graph> {
   }
 
   // cạnh note<->note do connections khai báo (đậm hơn)
-  const exists = new Set(notes.map((n) => `${n.type}:${n.slug}`));
   for (const n of notes) {
-    for (const c of n.data.connections) {
-      if (exists.has(`${n.type}:${c}`)) {
-        links.push({ source: noteId(n), target: `note:${n.type}:${c}`, weight: 2.4 });
+    for (const other of notes) {
+      if (other !== n && isConnected(n, other)) {
+        links.push({ source: noteId(n), target: noteId(other), weight: 2.4 });
       }
     }
   }

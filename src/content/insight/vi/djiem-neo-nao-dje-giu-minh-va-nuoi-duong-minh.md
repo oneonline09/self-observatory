@@ -1,4 +1,5 @@
 ---
+translationKey: djiem-neo-nao-dje-giu-minh-va-nuoi-duong-minh
 title: Điểm neo nào để giữ mình và nuôi dưỡng mình?
 date: 2026-09-14
 summary: "Tôi chiêm nghiệm về hai trạng thái khác nhau bên trong mình: ủ rũ, yếu
@@ -6,10 +7,10 @@ summary: "Tôi chiêm nghiệm về hai trạng thái khác nhau bên trong mìn
   phân tích một vài điều kiện để kích hoạt, nuôi dưỡng cái thứ hai cho bản thân
   mình."
 topics:
-  - Hiểu mình
-  - Thành thật với chính mình
+  - hieu-minh
+  - thanh-that-voi-chinh-minh
 tags:
-  - Phản tư
+  - phan-tu
 draft: false
 ---
 Tôi đã quan sát điều này, và nhận ra sự lặp đi lặp lại của nó rất nhiều trong cuộc sống. Một là "phần" vô thức, thói quen của mình thường xuyên hiện hữu trong đời sống. Nó thường xuyên ở thế bị động, thấp cổ, bé họng, sợ sệt, thiếu chắc chắn. Làm gì cũng bối rối, chưa rõ ràng lắm. Có khi nó không dám thể hiện mình ra. Đấy là cái phần tôi không thích lắm. Nó thường xuyên nó không: không có khả năng, không có chuyên môn, không có tiền bạc, không có gì cả, không biết gì cả. Trời ơi, một đống chữ không. Nó hạn chế tư duy, hành động, hình dung và sự dấn thân nhiều lắm. Vì nhìn đâu cũng không thấy lối ra hết. Bí bách, bực bội, buồn bã, bùng binh quá trời. Tôi không rõ phần này được nuôi dưỡng thế nào. Nhưng nó đã dẫn dắt tôi lâu lắm rồi. Nó cần nghỉ ngơi, ủ phân, và lên men. Để biến thành cái gì đó khác hơn, nuôi dưỡng hơn, giàu chất dinh dưỡng hơn, và dùng được.

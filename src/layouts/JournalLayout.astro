@@ -4,6 +4,13 @@ import { t } from '../i18n/ui';
 import { topicUrl, tagUrl } from '../lib/urls';
 import type { JournalEntry } from '../lib/journal';
 import { getJournalTranslation } from '../lib/journal';
+import { getTermLabels } from '../lib/terms';
+import { marked } from 'marked';
+
+// Bối cảnh / Cơ duyên / Suy nghĩ được viết bằng Markdown (đậm, nghiêng, link, danh sách…).
+// breaks: true -> một lần xuống dòng trong CMS vẫn là một lần xuống dòng trên trang.
+const md = (text: string) => marked.parse(text.trim(), { breaks: true, gfm: true }) as string;
+const terms = await getTermLabels();
 
 interface Props {
   entry: JournalEntry;
@@ -41,8 +48,8 @@ const hasTerms = data.topics.length > 0 || data.tags.length > 0;
     {
       hasTerms && (
         <div class="chips" style="margin-top:16px">
-          {data.topics.map((x) => <a class="chip topic" href={topicUrl(lang, x)}>{x}</a>)}
-          {data.tags.map((x) => <a class="chip tag" href={tagUrl(lang, x)}>#{x}</a>)}
+          {data.topics.map((x) => <a class="chip topic" href={topicUrl(lang, x)}>{terms.label('topic', x, lang)}</a>)}
+          {data.tags.map((x) => <a class="chip tag" href={tagUrl(lang, x)}>#{terms.label('tag', x, lang)}</a>)}
         </div>
       )
     }
@@ -54,22 +61,27 @@ const hasTerms = data.topics.length > 0 || data.tags.length > 0;
         <div class={`jitem k-${item.kind}`}>
           <div class="jtop">
             <span class="jkind">{tt(KIND_KEY[item.kind])}</span>
-            <h3>
-              {item.link ? (
-                <a href={item.link} target="_blank" rel="noopener">{item.name}</a>
-              ) : (
-                item.name
-              )}
-            </h3>
+            {item.name && (
+              <h3>
+                {item.link ? (
+                  <a href={item.link} target="_blank" rel="noopener">{item.name}</a>
+                ) : (
+                  item.name
+                )}
+              </h3>
+            )}
+            {!item.name && item.link && (
+              <a class="jlink" href={item.link} target="_blank" rel="noopener">{item.link}</a>
+            )}
           </div>
           {
             (item.context || item.occasion || item.people.length > 0 || item.reflection) && (
               <div class="jfields">
                 {item.context && (
-                  <div class="jfield"><span class="jlabel">{tt('jf.context')}</span><div class="jval">{item.context}</div></div>
+                  <div class="jfield"><span class="jlabel">{tt('jf.context')}</span><div class="jval" set:html={md(item.context)} /></div>
                 )}
                 {item.occasion && (
-                  <div class="jfield"><span class="jlabel">{tt('jf.occasion')}</span><div class="jval">{item.occasion}</div></div>
+                  <div class="jfield"><span class="jlabel">{tt('jf.occasion')}</span><div class="jval" set:html={md(item.occasion)} /></div>
                 )}
                 {item.people.length > 0 && (
                   <div class="jfield">
@@ -78,7 +90,7 @@ const hasTerms = data.topics.length > 0 || data.tags.length > 0;
                   </div>
                 )}
                 {item.reflection && (
-                  <div class="jfield jreflect"><span class="jlabel">{tt('jf.reflection')}</span><div class="jval">{item.reflection}</div></div>
+                  <div class="jfield jreflect"><span class="jlabel">{tt('jf.reflection')}</span><div class="jval" set:html={md(item.reflection)} /></div>
                 )}
               </div>
             )
@@ -93,10 +105,23 @@ const hasTerms = data.topics.length > 0 || data.tags.length > 0;
   /* Giữ đúng cách xuống dòng / ngắt đoạn người viết gõ trong CMS */
   .jfields { gap: 16px; }
   .jval {
-    white-space: pre-line;
     line-height: 1.78;
     overflow-wrap: anywhere;
   }
+  /* Nội dung Markdown được chèn bằng set:html nên phải dùng :global */
+  .jval :global(p) { margin: 0 0 0.85em; }
+  .jval :global(> :last-child) { margin-bottom: 0; }
+  .jval :global(ul),
+  .jval :global(ol) { margin: 0 0 0.85em; padding-left: 1.4em; }
+  .jval :global(li) { margin: 0.2em 0; }
+  .jval :global(blockquote) {
+    margin: 0 0 0.85em;
+    padding-left: 14px;
+    border-left: 2px solid var(--line);
+    color: var(--muted);
+  }
+  .jval :global(a) { text-decoration: underline; text-underline-offset: 3px; }
+  .jlink { font-size: 14px; overflow-wrap: anywhere; }
   /* Bỏ thanh dọc xấu, đổi thành khối bo tròn dịu mắt */
   .jreflect {
     border-left: none;

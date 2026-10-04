@@ -1,4 +1,5 @@
 ---
+translationKey: djiem-neo-nao-dje-giu-minh-va-nuoi-duong-minh
 title: What anchor holds me steady and keeps me nourished?
 date: 2026-09-14
 summary: >
@@ -7,7 +8,10 @@ summary: >
   to work out some of the conditions that activate and nourish the second one in
   me.
 topics:
-  - Self-understanding
+  - hieu-minh
+  - thanh-that-voi-chinh-minh
+tags:
+  - phan-tu
 draft: false
 ---
 I've observed this, and I've noticed how much it repeats itself in my life. One is the unconscious "part," the habitual part of me that shows up constantly in daily life. It's usually passive, lowly, voiceless, fearful, uncertain. Whatever it does, it's flustered, never quite clear. Sometimes it doesn't dare show itself at all. That's the part I don't much like. It's constantly *not*: no ability, no expertise, no money, nothing at all, knows nothing. God, a pile of *nots*. It restricts my thinking, my action, my imagination, my willingness to commit. Because everywhere it looks, it sees no way out. Blocked, bothered, blue, going round and round a roundabout. I'm not sure how this part got fed. But it has been leading me for a long time now. It needs to rest, to be composted, to ferment. So it can turn into something else — something more nourishing, richer in nutrients, and actually usable.
