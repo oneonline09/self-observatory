@@ -1,7 +1,8 @@
 ---
 translationKey: thuc-tap-barugongyang-o-dubuk-ulsan-1
-title: Thực tập Barugongyang ở Dubuk, Ulsan
+title: Practicing Barugongyang at Dubuk, Ulsan
 date: 2026-10-20
+summary: Reflections on Practicing Barugongyang
 topics:
   - van-hoa-to-chuc
 tags:
@@ -10,26 +11,26 @@ tags:
 draft: false
 ---
 
-Sau 3 năm thì tôi có dịp quay trở lại trung tâm thiền tập Dubuk của Jungto Society tại Ulsan, Hàn Quốc. So với 3 năm trước thì tôi có nhiều trải nghiệm hơn, trưởng thành hơn. Nên tôi cũng để ý nhiều hơn và rút được nhiều điều họchỏi được. 
+After three years, I had the chance to return to Jungto Society’s Dubuk Meditation Center in Ulsan, South Korea. Since then I have gained more experience and grown more mature, so this time I noticed more and learned much more.
 
-Điều khiến tôi thu hút đầu tiên là thực hành **Barugongyang** (발우공양). Đây là một thực  hành truyền thống của Phật giáo Hàn Quốc, khi các tu sĩ dùng bữa cùng nhau trong bốn chiếc bát bằng gỗ, mỗi loại đựng một kiểu đồ ăn khác nhau: cơm, canh, đồ ăn và nước.
+The first thing that caught my attention was the practice of Barugongyang (발우공양). This is a traditional practice of Korean Buddhism in which monastics eat together using four wooden bowls, each holding a different kind of food: rice, soup, side dishes, and water.
 
-Vì nhiều người được tiếp xúc **Barugongyang** (발우공양) lần đầu, nên cô Choi từ Jungto Society đã dành buổi tối ngày đầu tiên và các thành viên Jungto Youth đã hỗ trợ giải thích về ý nghĩa và các bước thực hành để chúng tôi làm quen. 
+Many of us were trying Barugongyang (발우공양) for the first time. So on the first evening, Ms. Choi from Jungto Society, with help from members of Jungto Youth, explained its meaning and walked us through each step so we could get used to it.
 
-**Barugongyang** (발우공양) đòi hỏi người thực tập phải có ý thức ăn uống chừng mực, vừa đủ, không ăn uống cẩu thả, không lấy nhiều hơn mình cần, và cũng cần phải lưu ý đến đại chúng xung quanh. Do đó, **Barugongyang** (발우공양) rèn luyện cho mỗi người sự kiên nhẫn, tỉ mỉ, óc quan sát, trách nhiệm với chính mình và với những người xung quanh.
+Barugongyang (발우공양) asks you to eat with moderation and awareness. You take just enough, never eat carelessly, and never take more than you need, while staying mindful of the community around you. In this way, Barugongyang (발우공양) builds patience, attention to detail, observation, and a sense of responsibility toward yourself and the people around you.
 
-Điều cốt lõi cần ghi nhớ để ăn uống cho đúng mực, đó là ăn uống gọn gàng, sạch sẽ. Sau khi ăn, bát phải sạch, sạch đến mức không cần phải rửa. Chỉ cần lau nhẹ qua là có thể cất đi, dùng cho hôm sau. Để ăn sạch thì phải chú ý ăn hết tất cả những gì có trong bát. Không để thừa dù chỉ một hạt cơm hay miếng rau nhỏ xíu. Mới đầu mọi người có thể bỡ ngỡ, cảm thấy lạ lùng, thậm chí thấy hơn bẩn. Để ăn sạch bát, thì sẽ có một vài bước dùng nước, và kim chi để tráng cho sạch bát. Tráng xong thì uống hết nước, cặn đồ ăn cùng với miếng kim chi cuối cùng (dùng để "lau" bát). 
+The key to eating properly is to eat neatly and cleanly. After the meal, the bowls must be clean, so clean that they don’t need washing. A light wipe is enough before they are put away for the next day. To eat cleanly, you have to finish everything in your bowls and leave behind not a single grain of rice or even the smallest piece of vegetable. At first, people may feel unsure, find it strange, or even think it’s a little unhygienic. To clean the bowls, there are a few steps that use water and a piece of kimchi to rinse them. Once they are rinsed, you drink the water along with the leftover bits of food and the last piece of kimchi, which is used to “wipe” the bowl.
 
-Trước giờ thì tôi bao giờ cũng xem cặn thừa đồ ăn là không nên ăn. Thường bỏ qua hoặc mang đem đổ đi. Người Việt hay nói "cơm thừa, canh cặn" là vì thế. Nhưng thực hành **Barugongyang** (발우공양) một hồi, cộng với được cô Choi giải thích cặn kẽ, tỉ mỉ, tôi đã thay đổi cái thái độ và niềm tin đó. 
+I had always believed food scraps were not meant to be eaten. I usually left them or threw them away. That is why Vietnamese people have the expression “cơm thừa, canh cặn,” meaning “leftover rice and soup dregs,” which refers to scraps fit only to be discarded. But after practicing Barugongyang (발우공양) for a while, and after Ms. Choi’s careful, detailed explanations, I changed that attitude and belief.
 
-**Barugongyang** không chỉ là một bữa ăn, nó còn là một nghi thức, một lời nhắc nhở, lời dạy và sự thực tập chánh niệm, phát triển lòng từ bi. Trong quá trình thực tập, tăng đoàn đều phải đọc kinh, niệm chú để thể hiện sự biết ơn đến thực phẩm và các công phu lao tác. Trong quá trình đó, cũng gửi niệm lành và sự hỗ trợ đến các loài ma qủy. Trước khi ăn, mỗi người chúng tôi sẽ mang một vài hạt cơm để cho vào một bát, làm lễ, rồi mới mang đi cúng cho các loài phi nhân.
+Barugongyang is not just a meal. It is also a ritual, a reminder, a teaching, and a practice of mindfulness and compassion. Throughout the practice, the sangha chants sutras and mantras to express gratitude for the food and for all the labor behind it. We also send good wishes and support to ghostly beings. Before eating, each of us puts a few grains of rice into a bowl. After a short ceremony, these are taken out as an offering to non-human beings.
 
-Trong một vài truyền thống tâm linh, người ta cho rằng có thiên đàng và cả địa ngục. Thường thì trong địa ngục thì có các loài xúc sinh, ngạ quỷ, ma đói. Thực hành **Barugongyang** thì hướng đến ma đói, để giúp đỡ chúng. Cô Choi chia sẻ rằng ma đói thì họng của nó rất bé, khó mà ăn uống gì được. 
+In some spiritual traditions, people believe in both heaven and hell. Hell is usually described as the home of animals, pretas, and hungry ghosts. Barugongyang is directed toward the hungry ghosts, to help them. Ms. Choi explained that a hungry ghost has a very tiny throat, so it can barely eat or drink anything.
 
-Việc ăn sạch chén bát không chừa cặn bẩn, một phần là để phần nước sau khi rửa sạch vẫn có thể cúng cho các loài súc sinh và ngạ quỷ. Nếu ta không ăn sạch, chúng có thể bị nghẹn hoặc không thể ăn gì được, uống gì được.
+Eating the bowls completely clean is partly so that the rinse water can still be offered to animals and hungry ghosts. If we leave residue, they might choke or be unable to eat or drink at all.
 
-Bên cạnh đó, trong cả quá trình, mỗi người đều phải chú ý từng li từng tí, từng hành động nhỏ. Tất cả phải chuẩn chỉnh, đúng thứ tự, nếu không bát rửa không sạch và bẩn. Hoặc bình bát của mỗi người sẽ lộn xộn, xấu xí, thiếu chuẩn chỉnh, không ra thể thống gì.
+Beyond that, everyone has to pay attention to every detail and every small action throughout the whole process. Everything must be done properly and in the right order. Otherwise the bowls won’t come clean, or each person’s set of bowls ends up messy, unsightly, and nothing like it should be.
 
-Điều quan trọng nữa. Ăn thì ăn, những vẫn phải luôn chú ý đến người khác. Vì đồ ăn hay giẻ lau sàn được chuyền sang từ người này đến người kia. Nếu chậm chạp hoặc không lưu ý, có thể ảnh hưởng đến người khác, như họ không lấy kịp đồ ăn theo thời gian chẳng hạn. Cho nên không chỉ ý thức về những gì mình phải làm, mà tôi cũng phải ý thức đến những người kế cạnh mình xem họ như thế nào, để không ảnh hưởng đến cái chung.
+One more important point: while you eat, you still have to stay aware of others, because food and the floor cloth are passed from one person to the next. If you are slow or inattentive, you can affect others. For example, they might not get their food in time. So I had to be aware not only of what I needed to do but also of the people next to me and how they were doing, so I would not disrupt the group.
 
-**Barugongyang** (발우공양) vừa giúp tôi thực tập sự nhanh nhẹn, vừa rèn luyện trí tuệ tâm linh.
+Barugongyang (발우공양) helped me practice being quick and nimble while also cultivating spiritual wisdom.
